@@ -6,8 +6,7 @@
   "scripts": {
     "build": "webpack --mode development",
     "prod": "webpack --mode production",
-    "start": "webpack-dev-server --mode development",
-    "dev": "npm run start & /opt/firefox_dev/firefox localhost:8080"
+    "start": "webpack-dev-server --mode development"
   },
   "author": "Chassis Ops",
   "license": "MIT",

@@ -1,4 +1,4 @@
 import './public/scss/main.scss'
 
-const ran = 21423
-console.log(`ran = ${ran}`);
+const ran = 'App running...'
+console.log(`ran = ${ran}`)

@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const webpack = require('webpack')
 
 module.exports = {
     entry: [
@@ -10,6 +11,11 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'static/js/[name].[chunkhash].js'
+    },
+    devServer: {
+        open: true,
+        compress: true,
+        port: 4000
     },
     module: {
         rules: [
@@ -41,8 +47,7 @@ module.exports = {
             filename: 'index.html',
             template: './src/public/index.html'
         })
-    ],
-    devServer: {
-        port: 8000
-    },
+        /* enable ONLY when HMR can be used for all dev assets */
+        // new webpack.HotModuleReplacementPlugin()
+    ]
 }
