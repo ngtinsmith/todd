@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const webpack = require('webpack')
+const HtmlWebpackInlineSVGPlugin = require('html-webpack-inline-svg-plugin')
 
 module.exports = {
     entry: [
@@ -46,8 +47,15 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: './src/public/index.html'
-        })
+        }),
         /* enable ONLY when HMR can be used for all dev assets */
         // new webpack.HotModuleReplacementPlugin()
+        new HtmlWebpackInlineSVGPlugin({
+            runPreEmit: true,
+            svgoConfig: {
+                removeTitle: false,
+                removeViewBox: true,
+            },
+        })
     ]
 }

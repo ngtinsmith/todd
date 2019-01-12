@@ -20,8 +20,20 @@ __PROJECT SETUP__
 <!-- Wireframe / Sketch -->
 <!-- Stylesheet (SASS) -->
 <!-- HTML markup -->
-UI - Modern CSS, BEM, SASS, CSS Grid
+UI - Modern CSS, SASS, CSS Grid, mix-blend-mode + bg: #000
 UX - JS, ESNext, component style
+
+Assets:
+    menu
+    star
+    lock
+    gear
+    plus
+    x
+    ellipsis
+    avatar
+    check
+    search
 
 __STRUCTURE__
 

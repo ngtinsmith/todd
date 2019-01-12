@@ -9,30 +9,75 @@
 <body>
     <div class="main">
         <div class="main-wrapper">
-            <header class="main-header">
-                <div class="header-menu">
-                    Boards
-                    Workspaces
-                    Favorites
-                    Archive
-                    Options
-                    <div class="search">
-                        <textarea name="" id="" cols="30" rows="10"></textarea>
-                        Search Icon
+
+            <header class="header">
+                <div class="header-items">
+
+                    <div class="header-menu">
+                        <img inline src="src/public/assets/menu.svg">
+                        <div class="menu-items">
+                            <div class="menu-header">
+                                <h3>Logo</h3>
+                                <h5>Subtitle</h5>
+                            </div>
+                            <ul class="menus">
+                                <li class="menu-item">
+                                    <img inline src="src/public/assets/grid-f.svg">
+                                    Workspace
+                                </li>
+                                <li class="menu-item">
+                                    <img inline src="src/public/assets/unordered-list.svg">
+                                    List
+                                </li>
+                                <li class="menu-item">
+                                    <img inline src="src/public/assets/star.svg">
+                                    Favorites
+                                </li>
+                                <li class="menu-item">
+                                    <img inline src="src/public/assets/history.svg">
+                                    Recent
+                                </li>
+                                <li class="menu-item">
+                                    <div class="menu-spacer"></div>
+                                </li>
+                                <li class="menu-item">
+                                    <img inline src="src/public/assets/archive.svg">
+                                    Archive
+                                </li>
+                                <li class="menu-item">
+                                    <img inline src="src/public/assets/trash.svg">
+                                    Trash
+                                </li>
+                            </ul>
+                        </div>                    
+                        <div class="menu-search">
+                            <input type="text" placeholder="Search Todo...">
+                            <img inline src="src/public/assets/search.svg">
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="header-items">
+                    <div class="header-logo">
+                        <a href="#">Todd</a>
                     </div>
                 </div>
-                <div class="header-logo">
-                    Todd
+                <div class="header-items">
+                    <div class="header-user">
+                        <div class="user-add-ws">
+                            <img inline src="src/public/assets/plus.svg">
+                            <span>New Workspace</span>
+                        </div>
+                        <img inline src="src/public/assets/user-circle.svg">
+                        <div class="user-options">
+                            Account-Name
+                            Profile
+                            Settings
+                            Logout
+                        </div>
+                    </div>
                 </div>
-                <div class="header-user"></div>
-                <div class="header-u-btn">New Workspace</div>
-                <div class="header-u-btn">Options</div>
-                <div class="header-u-btn">
-                    Account-Name
-                    Profile
-                    Settings
-                    Logout
-                </div>
+                
             </header>
             <div class="ws-header">
                 <!-- workspace = draggable to left or right -->
@@ -81,6 +126,8 @@
             <div class="workspace">
                 <!-- overflow-X -->
                 <div class="ws-wrapper">
+                    <h1>De Finibus Bonorum et Malorum</h1>
+                    <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
 
                     <div class="list">
                         <div class="list-wrapper">
@@ -213,7 +260,8 @@
                     </div>
 
                 </div>
-            </div> 
+            </div>
+            <script src="../vendor/jam-master/js/jam.min.js"></script>
         </div> <!-- main-wrapper --> 
     </div>
 </body>
