@@ -1,3 +1,15 @@
+@import 'base/color';
+
 * {
     box-sizing: border-box;
+}
+
+.main {
+    // quicksand, arimo, questrial, liberation sans
+    // import font
+    font-family: 'Raleway', sans-serif;
+}
+
+a {
+    // color: $color-white;
 }

@@ -1,0 +1,38 @@
+// Color Pallete
+
+$color-white: #ffffff;
+$color-black: #000000;
+$color-blue: #1e38fd;
+$color-blue-darken: #1a32e7;
+$color-red: #ff5d55;
+$color-red-darken: #ff2c21;
+$color-grey: rgb(248, 248, 248);
+$color-grey-darker: #efefef;
+
+// Temp Variables
+
+$bg-header: $color-red;
+$bg-search: rgba($color-white, 0.85);
+$bg-search-active: rgba($color-white, 0.85);
+$search-icon: $color-red;
+$bg-menu: rgba($color-white, 0.7);
+$header-icon: rgba($color-white, 0.9);
+$header-icon-active: rgba($color-white, 1.0);
+$user-avatar: rgba($color-white, 0.9);
+$btn-user-add: rgba($color-white, 0.1);
+$btn-user-add-color: rgba($color-white, 0.8);
+
+
+// Workspace Sub-header
+
+$bg-workspace: $color-grey;
+$bg-ws-select: $color-blue;
+$bg-ws-select-hover: $color-blue-darken;
+$bg-ws-settings: $color-grey-darker;
+$bg-ws-settings-text: rgba($color-black, 0.7);
+$ws-select-text: rgba($color-white, 1.0);
+$ws-select-icon: rgba($color-white, 1.0);
+$ws-select-separator: rgba($color-white, 0.2);
+$ws-header-icons: rgba($color-black, 0.3);
+$ws-header-icons-hover: rgba($color-black, 0.6);
+$ws-settings-separator: rgba($color-black, 0.05);

@@ -51,7 +51,7 @@
                             </ul>
                         </div>                    
                         <div class="menu-search">
-                            <input type="text" placeholder="Search Todo...">
+                            <input type="text">
                             <img inline src="src/public/assets/search.svg">
                         </div>
                     </div>
@@ -81,46 +81,47 @@
             </header>
             <div class="ws-header">
                 <!-- workspace = draggable to left or right -->
-                <div class="ws-primary">
-                    <select name="" id="" class="ws-items">
-                        Workspace 1
-                        Workspace 2
-                        Workspace 3
-                        Workspace 4
-                    </select>
+                <div class="ws-header-wrap">
+                    <div class="ws-dropdown is-expanded"> <!-- is-expanded -->
+                        <div class="ws-selected">Workspace Default</div>
+                        <img inline src="src/public/assets/chevron-down.svg">
+                        <ul class="ws-items">
+                            <li>Workspace Default</li>
+                            <li>Workspace 2</li>
+                            <li>Workspace 3</li>
+                            <li>Workspace 4</li>
+                        </ul>
+                    </div>
                     <div class="ws-toggles">
-                        Starred
-                        Lock
+                        <img inline src="src/public/assets/star-f.svg">
+                        <img inline src="src/public/assets/padlock-f.svg">
                     </div>
                     <div class="ws-settings">
-                        <div class="ws-set-r1">
-                            Background
-                            Filter Board
-                            More...
-                                Expand to Full Panel, click back to exit
-                                    Settings
-                                    Labels
-                                    Collections
-                                    Archives
-                                
-                        </div>
-                        <div class="ws-set-r2">
-                            Widgets
-                            Other Quick Stuff
-                        </div>
-                        <div class="ws-set-r2">
-                            Activities
-                            <div class="ws-logs">
-                                Activity 1
-                                Activity 2
-                                Activity 3
-                                Activity 4
-                                Activity 5
-                                View All Activities
-                                    Expand to Full Panel, click back to exit
+                        <img inline src="src/public/assets/cog-f.svg">
+                        <div class="ws-set">
+                            <img inline src="src/public/assets/close.svg">
+                            <div class="ws-set-group">
+                                <h3 class="ws-set-heading">Workspace Settings</h3>
+                                <ul class="set-options">
+                                    <li>Filter</li>
+                                    <li>Archive</li>
+                                    <li>Labels</li>
+                                    <li><a href="">More...</a></li> <!-- Expand to Full Panel, click back to exit -->
+                                </ul> <!-- Settings, Labels, Collections, Archives -->
+                            </div>
+                            <div class="ws-set-group">
+                                <h3 class="ws-set-heading">Activities</h3>
+                                <ul class="set-options ws-logs">
+                                    <li>Activity 1</li>
+                                    <li>Activity 2</li>
+                                    <li>Activity 3</li>
+                                    <li>Activity 4</li>
+                                    <li>Activity 5</li>
+                                    <li><a href="">View All Activities</a></li> <!-- Expand to Full Panel, click back to exit -->
+                                </ul>
                             </div>
                         </div>
-                    </div>
+                    </div> <!-- ws-settings -->
                 </div>
             </div> <!-- ws-header -->
             <div class="workspace">
@@ -261,7 +262,6 @@
 
                 </div>
             </div>
-            <script src="../vendor/jam-master/js/jam.min.js"></script>
         </div> <!-- main-wrapper --> 
     </div>
 </body>
