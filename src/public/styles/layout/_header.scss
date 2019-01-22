@@ -1,6 +1,8 @@
 .header {
     display: flex;
     background: $bg-header;
+    position: relative;
+    z-index: 5;
 }
 
 // Header Item Wrapper
@@ -25,7 +27,7 @@
     align-items: center;
 
     svg.jam-menu {
-        width: 48px;
+        width: 50px;
         fill: $header-icon;
         cursor: pointer;
         
@@ -154,6 +156,7 @@
     display: flex;
     align-items: center;
     padding-right: 8px;
+    position: relative;
 
     svg {
         width: 24px;
@@ -166,7 +169,7 @@
     }
     
     .jam-user-circle {
-        margin-left: 10px;
+        margin: 0 5px 0 10px;
         width: 36px;
         cursor: pointer;
     }
@@ -192,8 +195,65 @@
             margin-left: 2px;
         }
     }
+}
 
-    .user-options {
-        display: none;
+.user-options {
+    display: none;
+    position: absolute;
+    top: 48px;
+    right: 10px;
+    z-index: 1;
+    
+    &::after {
+        content: " ";
+        background: #e9e9e9;
+        position: absolute;
+        top: -2px;
+        right: 13px;
+        width: 15px;
+        height: 15px;
+        transform: rotate(135deg);
+        z-index: -1;
+    }
+    
+    .user-opt-wrap {
+        position: relative;
+        top: 4px;
+        width: 240px;
+        background: #e9e9e9;
+        border-radius: 5px;
+        box-shadow: 0px 4px 2px -1px rgba(0, 0, 0, 0.3);
+        
+    }   
+}
+
+.user-opt-group {
+    font-size: 0.9rem;
+    color: #666;
+    
+    .opt-heading {
+        color: #555;
+        padding: 10px 12px;
+        font-size: 18px;
+    }
+    
+    .opt-items {
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        padding: 8px 0;
+        
+        li {
+            padding: 8px 16px;
+            font-weight: 600;
+            cursor: pointer;
+            
+            &:hover {
+                background: #ddd;
+                color: #444;
+            }
+        }
+
+        a {
+            text-decoration: none;
+        }
     }
 }

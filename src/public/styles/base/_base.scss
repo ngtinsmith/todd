@@ -1,15 +1,15 @@
-@import 'base/color';
+// Base Elements
 
 * {
     box-sizing: border-box;
 }
 
-.main {
-    // quicksand, arimo, questrial, liberation sans
-    // import font
-    font-family: 'Raleway', sans-serif;
+html, body {
+    height: 100%;
+    overflow: hidden;
 }
 
-a {
-    // color: $color-white;
+svg {
+    width: 24px;
+    fill: #888;
 }

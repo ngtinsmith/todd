@@ -14,45 +14,45 @@
                 <div class="header-items">
 
                     <div class="header-menu">
-                        <img inline src="src/public/assets/menu.svg">
-                        <div class="menu-items">
+                        <img inline src="assets/svg/menu.svg">
+                        <div class= "menu-items">
                             <div class="menu-header">
                                 <h3>Logo</h3>
                                 <h5>Subtitle</h5>
                             </div>
                             <ul class="menus">
                                 <li class="menu-item">
-                                    <img inline src="src/public/assets/grid-f.svg">
+                                    <img inline src="assets/svg/grid-f.svg">
                                     Workspace
                                 </li>
                                 <li class="menu-item">
-                                    <img inline src="src/public/assets/unordered-list.svg">
+                                    <img inline src="assets/svg/unordered-list.svg">
                                     List
                                 </li>
                                 <li class="menu-item">
-                                    <img inline src="src/public/assets/star.svg">
+                                    <img inline src="assets/svg/star.svg">
                                     Favorites
                                 </li>
                                 <li class="menu-item">
-                                    <img inline src="src/public/assets/history.svg">
+                                    <img inline src="assets/svg/history.svg">
                                     Recent
                                 </li>
                                 <li class="menu-item">
                                     <div class="menu-spacer"></div>
                                 </li>
                                 <li class="menu-item">
-                                    <img inline src="src/public/assets/archive.svg">
+                                    <img inline src="assets/svg/archive.svg">
                                     Archive
                                 </li>
                                 <li class="menu-item">
-                                    <img inline src="src/public/assets/trash.svg">
+                                    <img inline src="assets/svg/trash.svg">
                                     Trash
                                 </li>
                             </ul>
                         </div>                    
                         <div class="menu-search">
                             <input type="text">
-                            <img inline src="src/public/assets/search.svg">
+                            <img inline src="assets/svg/search.svg">
                         </div>
                     </div>
                     
@@ -65,26 +65,38 @@
                 <div class="header-items">
                     <div class="header-user">
                         <div class="user-add-ws">
-                            <img inline src="src/public/assets/plus.svg">
+                            <img inline src="assets/svg/plus.svg">
                             <span>New Workspace</span>
                         </div>
-                        <img inline src="src/public/assets/user-circle.svg">
+                        <img inline src="assets/svg/user-circle.svg">
                         <div class="user-options">
-                            Account-Name
-                            Profile
-                            Settings
-                            Logout
+                            <div class="user-opt-wrap">
+                                <div class="user-opt-group">
+                                    <h3 class="opt-heading">Occam's Razor</h3>
+                                    <ul class="opt-items">
+                                        <li>Profile</li>
+                                        <li>Settings</li>
+                                        <li>More</li>
+                                    </ul>
+                                    <ul class="opt-items">
+                                        <li>Stats</li>
+                                        <li>Help</li>
+                                        <li><a href="">Logout</a></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
             </header>
+
+
             <div class="ws-header">
                 <!-- workspace = draggable to left or right -->
                 <div class="ws-header-wrap">
-                    <div class="ws-dropdown is-expanded"> <!-- is-expanded -->
+                    <div class="ws-dropdown"> <!-- is-expanded -->
                         <div class="ws-selected">Workspace Default</div>
-                        <img inline src="src/public/assets/chevron-down.svg">
+                        <img inline src="assets/svg/chevron-down.svg">
                         <ul class="ws-items">
                             <li>Workspace Default</li>
                             <li>Workspace 2</li>
@@ -93,15 +105,17 @@
                         </ul>
                     </div>
                     <div class="ws-toggles">
-                        <img inline src="src/public/assets/star-f.svg">
-                        <img inline src="src/public/assets/padlock-f.svg">
+                        <img inline src="assets/svg/star-f.svg">
+                        <img inline src="assets/svg/padlock-f.svg">
                     </div>
                     <div class="ws-settings">
-                        <img inline src="src/public/assets/cog-f.svg">
+                        <img inline src="assets/svg/cog-f.svg">
                         <div class="ws-set">
-                            <img inline src="src/public/assets/close.svg">
+                            <div class="ws-set-heading">
+                                <h3>Workspace Settings</h3>
+                                <img inline src="assets/svg/close.svg">
+                            </div>
                             <div class="ws-set-group">
-                                <h3 class="ws-set-heading">Workspace Settings</h3>
                                 <ul class="set-options">
                                     <li>Filter</li>
                                     <li>Archive</li>
@@ -110,13 +124,18 @@
                                 </ul> <!-- Settings, Labels, Collections, Archives -->
                             </div>
                             <div class="ws-set-group">
-                                <h3 class="ws-set-heading">Activities</h3>
+                                <div class="ws-set-heading">
+                                    <h3>Activities</h3>
+                                </div>
                                 <ul class="set-options ws-logs">
-                                    <li>Activity 1</li>
-                                    <li>Activity 2</li>
-                                    <li>Activity 3</li>
-                                    <li>Activity 4</li>
-                                    <li>Activity 5</li>
+                                    <li>Lorem ipsum beatae neque</li>
+                                    <li>Obcaecati beatae neque vero</li>
+                                    <li>Suscipit quis mollitia  architecto </li>
+                                    <li>Optio, id sit? Molestiae.</li>
+                                    <li>Dolor sit amet consectetur adipisicing elit.</li>
+                                    <li>Necessitatibus vitae inventore?</li>
+                                    <li>Nulla dicta asperiores facilis</li>
+                                    <li>Quo quam veritatis.</li>
                                     <li><a href="">View All Activities</a></li> <!-- Expand to Full Panel, click back to exit -->
                                 </ul>
                             </div>
@@ -124,144 +143,115 @@
                     </div> <!-- ws-settings -->
                 </div>
             </div> <!-- ws-header -->
+
+
             <div class="workspace">
-                <!-- overflow-X -->
-                <div class="ws-wrapper">
-                    <h1>De Finibus Bonorum et Malorum</h1>
-                    <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+                    <div class="panel">
+                        
+                        <div class="list">
+                            <div class="list-content">
 
-                    <div class="list">
-                        <div class="list-wrapper">
-                            <div class="list-content">
-                                <div class="list-header">
-                                    <div class="list-label">
-                                        Color Palette Here...
-                                    </div>
-                                    <textarea name="" id="" cols="30" rows="10">List Header Here...</textarea>
-                                    <div class="list-options">
-                                        Copy List
-                                        Sort
-                                        Filter
-                                        Label (show color palette)
-                                        Select Items
-                                        Select All
-                                        Archive List Items
-                                        Archive List
-                                    </div>
-                                    <div class="list-progress">
-                                        <div class="list-progress-bar"></div>
-                                    </div>
-                                </div>
-                                <div class="list-items">
-                                    <!-- overflow-Y -->
-                                    <div class="list-item">
-                                        Check Button
-                                        Todo Item 1
-                                        <div class="list-item-options">
-                                            Duplicate
-                                            Delete
+                                    <div class="list-header">
+                                        <img inline src="assets/svg/circle-f.svg">
+                                        <input class="list-title" type="text" placeholder="Enter Title Here...">
+                                        <img inline src="assets/svg/pin-f.svg">
+                                        <img inline src="assets/svg/more-horizontal.svg">
+                                        <div class="ls-options">
+                                            Copy List
+                                            Sort
+                                            Filter
+                                            Label (show color palette)
+                                            Select Items
+                                            Select All
+                                            Archive List Items
+                                            Archive List
+                                        </div>
+                                        <div class="list-progress">
+                                            <div class="list-progress-bar"></div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="list-add-item">
-                                    <textarea name="" id="" cols="30" rows="10" placeholder="Enter new todo item..."></textarea>
-                                    <div class="list-add-btns">
-                                        Add Card
-                                        X icon
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list">
-                        <div class="list-wrapper">
-                            <div class="list-content">
-                                <div class="list-header">
-                                    <div class="list-label">
-                                        Color Palette Here...
-                                    </div>
-                                    <textarea name="" id="" cols="30" rows="10">List Header Here...</textarea>
-                                    <div class="list-options">
-                                        Copy List
-                                        Sort
-                                        Filter
-                                        Label (show color palette)
-                                        Select Items
-                                        Select All
-                                        Archive List Items
-                                        Archive List
-                                    </div>
-                                    <div class="list-progress">
-                                        <div class="list-progress-bar"></div>
-                                    </div>
-                                </div>
-                                <div class="list-items">
-                                    <!-- overflow-Y -->
-                                    <div class="list-item">
-                                        Check Button
-                                        Todo Item 1
-                                        <div class="list-item-options">
-                                            Duplicate
-                                            Delete
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="list-add-item">
-                                    <textarea name="" id="" cols="30" rows="10" placeholder="Enter new todo item..."></textarea>
-                                    <div class="list-add-btns">
-                                        Add Card
-                                        X icon
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list">
-                        <div class="list-wrapper">
-                            <div class="list-content">
-                                <div class="list-header">
-                                    <div class="list-label">
-                                        Color Palette Here...
-                                    </div>
-                                    <textarea name="" id="" cols="30" rows="10">List Header Here...</textarea>
-                                    <div class="list-options">
-                                        Copy List
-                                        Sort
-                                        Filter
-                                        Label (show color palette)
-                                        Select Items
-                                        Select All
-                                        Archive List Items
-                                        Archive List
-                                    </div>
-                                    <div class="list-progress">
-                                        <div class="list-progress-bar"></div>
-                                    </div>
-                                </div>
-                                <div class="list-items">
-                                    <!-- overflow-Y -->
-                                    <div class="list-item">
-                                        Check Button
-                                        Todo Item 1
-                                        <div class="list-item-options">
-                                            Duplicate
-                                            Delete
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="list-add-item">
-                                    <textarea name="" id="" cols="30" rows="10" placeholder="Enter new todo item..."></textarea>
-                                    <div class="list-add-btns">
-                                        Add Card
-                                        X icon
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                </div>
-            </div>
+                                    <div class="list-items">
+                                        <div class="list-item">
+                                            <img inline src="assets/svg/check.svg">
+                                            <input type="text" class="todo-item" value="Todo Item 1">
+                                            <img inline src="assets/svg/more-horizontal.svg">
+                                            <div class="ls-item-options">
+                                                Duplicate
+                                                Delete
+                                            </div>
+                                        </div>
+                                        <div class="list-item">
+                                            <img inline src="assets/svg/check.svg">
+                                            <input type="text" class="todo-item" value="Todo Item 2">
+                                            <img inline src="assets/svg/more-horizontal.svg">
+                                            <div class="ls-item-options">
+                                                Duplicate
+                                                Delete
+                                            </div>
+                                        </div>
+                                        <div class="list-item">
+                                            <img inline src="assets/svg/check.svg">
+                                            <input type="text" class="todo-item" value="Todo Item 3">
+                                            <img inline src="assets/svg/more-horizontal.svg">
+                                            <div class="ls-item-options">
+                                                Duplicate
+                                                Delete
+                                            </div>
+                                        </div>
+                                        <div class="list-item">
+                                            <img inline src="assets/svg/check.svg">
+                                            <input type="text" class="todo-item" value="Todo Item 4">
+                                            <img inline src="assets/svg/more-horizontal.svg">
+                                            <div class="ls-item-options">
+                                                Duplicate
+                                                Delete
+                                            </div>
+                                        </div>
+                                        <div class="list-item">
+                                            <img inline src="assets/svg/check.svg">
+                                            <input type="text" class="todo-item" value="Todo Item 5">
+                                            <img inline src="assets/svg/more-horizontal.svg">
+                                            <div class="ls-item-options">
+                                                Duplicate
+                                                Delete
+                                            </div>
+                                        </div>
+                                        <div class="list-item">
+                                            <img inline src="assets/svg/check.svg">
+                                            <input type="text" class="todo-item" value="Todo Item 5">
+                                            <img inline src="assets/svg/more-horizontal.svg">
+                                            <div class="ls-item-options">
+                                                Duplicate
+                                                Delete
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="list-add-new">
+                                        <div class="row-add ls-input">
+                                            <img inline src="assets/svg/plus.svg">
+                                            <textarea name="" class="new-todo-text" placeholder="New todo item..." maxlength="32"></textarea>
+                                        </div>
+                                        <div class="row-add ls-btn">
+                                            <button class="btn-add">
+                                                Add Todo
+                                            </button>
+                                            <img inline src="assets/svg/close.svg">
+                                        </div>
+                                    </div>
+
+                            </div> <!-- list-content -->
+                        </div> <!-- list -->
+
+                        
+
+                                   
+
+                        
+
+                    </div> <!-- panel -->
+            </div> <!-- workspace -->
         </div> <!-- main-wrapper --> 
     </div>
 </body>

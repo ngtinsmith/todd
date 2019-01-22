@@ -23,17 +23,79 @@ __PROJECT SETUP__
 UI - Modern CSS, SASS, CSS Grid, mix-blend-mode + bg: #000
 UX - JS, ESNext, component style
 
-Assets:
-    menu
-    star
-    lock
-    gear
-    plus
-    x
-    ellipsis
-    avatar
-    check
-    search
+
+# UI
+
+Components
+    <!-- Header User Dropdown -->
+    <!-- WS Subheader Dropdown -->
+    <!-- WS Setting Panel - Slide from Right -->
+    <!-- List Cards -->
+
+# UX
+
+# Features
+
+Collapsable sub-todo items
+List card width density (auto & manual depending on content)
+List item height density (normal, compact, wide)
+List progress (progress element)
+Subtle (active & hover) circle bg shade on SVG icons
+Theme selection
+Draggable list and list-items
+
+
+# SASS
+
+prefix parent selector
+    .class & { }
+
+variable expansion
+    $box-width: 50%;
+    .box-class { width: #{$box-width} }
+
+variable defaults
+    $message-color: blue !default;
+
+control directives
+    $debug: false; // TODO: move to _settings.scss
+
+    article {
+        color: black;
+
+        @if ($debug) { // visualizing layout internals
+            border: 1px dotted red;
+        }
+    }
+
+100% heights
+webpack needs html-loader for inline img
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
 
 __STRUCTURE__
 

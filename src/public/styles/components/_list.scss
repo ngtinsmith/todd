@@ -1,0 +1,213 @@
+.list {
+    // border: 3px solid rgb(38, 0, 255);
+    overflow: hidden;
+
+    .list-content {
+        // border: 3px solid cyan;
+        max-height: 100%;
+        padding: 10px 0;
+        background: #f2f2f2;
+        border-radius: 5px;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        gap: 10px;
+        
+        > * {
+            // border: 1px solid red;
+            overflow: hidden;
+            margin: 0 10px;
+        }
+    }
+    
+    .list-items {
+        border-radius: 3px;
+        background: #fff;
+        box-shadow: inset 0px 0px 1px rgba(0,0,0,0.3);
+        overflow-y: auto;
+    }
+    
+    .list-header {
+        display: flex;
+        align-items: center;
+        height: 32px;
+        padding: 0 8px;
+        
+        svg:nth-child(3),
+        svg:nth-child(4) {
+            margin-left: auto;
+        }
+
+        svg:nth-child(3) {
+            margin-right: 5px;
+        }
+        
+        svg.jam {
+            width: 1.2rem;
+            fill: rgb(165, 165, 165);
+        }
+
+        .list-title {
+            overflow: hidden;
+            margin: 0 5px;
+            background: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }   
+    }
+    
+
+    .ls-options, .list-progress {
+        display: none;
+    }
+}
+
+// Todo Items
+
+.list-item {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    font-size: 0.88rem;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    min-height: 42px;
+
+    &:nth-child(1),
+    &:nth-child(2) {
+        svg.jam-check {
+            background:#aade00;
+            fill: white;
+            path {
+                display: block;
+            }
+        }
+    }
+    
+    svg.jam {
+        margin: 0 5px;
+    }
+
+    svg.jam-more-horizontal {
+        fill: #888;
+    }
+    
+    svg.jam-check {
+        background:#f3f3f3;
+        border-radius: 50%;
+        
+        path {
+            display: none;
+        }
+
+        &:hover {
+            background:#aade00;
+            fill: white;
+
+            path {
+                display: block;
+            }
+        }
+    }
+    
+    .todo-item {
+        width: 100%;
+        padding: 5px;
+        background: none;
+    }
+
+    &:first-child {
+
+        .ls-item-options {
+            position: absolute;
+            right: 0;
+            display: none;
+        }
+    }
+
+    &:not(:first-child) {
+        .ls-item-options {
+            display: none;
+        }
+    }
+
+}
+
+// List Row - Add New
+
+.list-add-new {
+    overflow: hidden;
+    
+    svg.jam {
+        width: 24px;
+        fill: #555;
+    }
+    
+    .input-add-item {
+        width: 100%;
+    }
+    
+    .row-add {
+        // border: 1px solid red;
+        display: flex;
+        align-items: center;
+
+        &:last-child {
+            margin-top: 10px;
+        }
+    }
+
+    .ls-input {
+        svg.jam {
+            margin-right: 5px;
+        }
+
+        .new-todo-text {
+            font-size: 0.88rem;
+            resize: none;
+            width: 100%;
+            padding: 5px 10px;
+            height: 28px;
+            border: none;
+            border-radius: 3px;
+        }
+    }
+    
+    .ls-btn {
+        display: none;
+
+        .btn-add {
+            margin-bottom: 2px;
+            position: relative;
+            border: none;
+            background: #888;
+            color: #f8f8f8;
+            padding: 5px 8px;
+            border-radius: 3px;
+            font-size: 0.86rem;
+            font-weight: 600;
+            box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 1);
+        }
+
+        svg.jam {
+            margin-left: 5px;
+        }
+    }
+
+    &:focus-within {
+        .ls-input {
+            svg.jam {
+                display: none;
+            }
+
+            .new-todo-text {
+                overflow-x: auto;
+                height: auto;
+                resize: vertical; 
+            }
+        }
+
+        .ls-btn {
+            display: flex;
+        }
+    }
+}
