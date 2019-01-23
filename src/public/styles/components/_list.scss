@@ -1,9 +1,9 @@
 .list {
-    // border: 3px solid rgb(38, 0, 255);
+    @include debug(gold);
     overflow: hidden;
 
     .list-content {
-        // border: 3px solid cyan;
+        @include debug(darkblue);
         max-height: 100%;
         padding: 10px 0;
         background: #f2f2f2;
@@ -13,7 +13,7 @@
         gap: 10px;
         
         > * {
-            // border: 1px solid red;
+            @include debug(red);
             overflow: hidden;
             margin: 0 10px;
         }
@@ -113,6 +113,7 @@
         width: 100%;
         padding: 5px;
         background: none;
+        overflow: hidden;
     }
 
     &:first-child {
@@ -147,7 +148,6 @@
     }
     
     .row-add {
-        // border: 1px solid red;
         display: flex;
         align-items: center;
 

@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --mode development",
     "prod": "webpack --mode production",
-    "start": "webpack-dev-server --mode development"
+    "dev": "webpack-dev-server --mode development"
   },
   "author": "Chassis Ops",
   "license": "MIT",

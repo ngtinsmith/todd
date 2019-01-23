@@ -26,11 +26,35 @@ UX - JS, ESNext, component style
 
 # UI
 
-Components
-    <!-- Header User Dropdown -->
-    <!-- WS Subheader Dropdown -->
-    <!-- WS Setting Panel - Slide from Right -->
-    <!-- List Cards -->
+<!-- header user dropdown -->
+ws-header dropdown
+<!-- ws settings panel - slide from right -->
+<!-- list cards -->
+hidden submenus
+    <!-- user menu -->
+    <!-- workspace settings -->
+    list
+        header - color label
+        main menu
+        item menu
+        todo-text overflow ellipsis (preset optimal char length)
+        auto scroll to first word / left most on focus exit
+        draggable-y
+<!-- layout debug function ~ debug(color) -->
+    separate debug triggers
+<!-- sidebar -->
+    collapse to icon
+    link --> display content to panel
+        new panel layout (?)
+    custom workspace controls on ws-header ~per sidebar menu
+        new ws-header layout (?)
+modular grid
+    allow easy component integration
+    set default padding and sizing
+use node_modules path for svg icons
+draggable-x workspace
+draggable-list/card
+
 
 # UX
 
@@ -43,6 +67,18 @@ List progress (progress element)
 Subtle (active & hover) circle bg shade on SVG icons
 Theme selection
 Draggable list and list-items
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # SASS

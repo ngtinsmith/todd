@@ -37,75 +37,7 @@
     }
 }
 
-.menu-items {
-    display: none;
-    position: fixed;
-    background: #13141d;
-    width: 200px;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    height: 100%;
-    
-    .menu-header {
-        padding: 10px;
-        height: 90px;
 
-        h3 {
-            color: rgba($color: #ffffff, $alpha: 0.8);
-            font-size: 28px;
-        }
-        
-        h5 {
-            position: relative;
-            padding: 10px 0 15px;
-            font-size: 10px;
-            font-weight: 400;
-            color: rgba($color: #ffffff, $alpha: 0.6)
-        }
-    }
-
-    .menus {
-        position: relative;
-        // overflow-Y: scroll;
-        height: 100%;
-
-        .menu-spacer {
-            border-bottom: 1px solid rgba($color: #ffffff, $alpha: 0.05);
-            width: 100%;
-            margin: 0 12px;
-        }
-    }
-
-    .menu-item {
-        padding: 10px;
-        display: flex;
-        align-items: center;
-        color: rgba($color: #ffffff, $alpha: 0.7);
-        font-size: 13px;
-        font-weight: 600;
-        height: 48px;pointer
-
-        svg {
-            width: 18px;
-            fill: rgba($color-white, 0.6);
-            margin: 0;
-        }
-
-        &:first-child {
-            background: $color-red-darken;
-
-            &::before {
-                content: "";
-                position: absolute;
-                width: 3px;
-                height: 48px;
-                left: 0px;
-                background: #ff2c21;;
-            }
-        }
-    }
-}
 
 .menu-search {
     background: $bg-search;
