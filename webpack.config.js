@@ -1,4 +1,4 @@
-// process.traceDeprecation = true;
+process.traceDeprecation = true;
 
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -11,18 +11,26 @@ module.exports = {
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'static/js/[name].[chunkhash].js',
+        filename: 'static/js/[name].[hash].js',
     },
     devServer: {
         open: true,
         compress: true,
-        port: 4000
+        port: 4000,
     },
-    devtool: "source-map", // for CSS Devtool SourceMaps
+    /* Devtool SourceMaps
+     * 
+     * dev  - eval-source-map
+     *        cheap-module-eval-source-map 
+     * prod - source-map
+*             inline-source-map
+     **/
+    devtool: "source-map",
     module: {
         rules: [
             {
                 test: /\.js$/,
+                include: path.resolve(__dirname, 'src'),
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader'
@@ -32,6 +40,7 @@ module.exports = {
                 test: /\.(sc|sa|c)ss$/,
                 exclude: /node_modules/,
                 use: [
+                    'style-loader',
                     MiniCssExtractPlugin.loader,
                     { 
                         loader: 'css-loader',

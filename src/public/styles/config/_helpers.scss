@@ -10,3 +10,25 @@ $debug: false;
         border-style: solid;
     }
 }
+
+$debug-min: true;
+// $debug-min: false;
+
+@mixin debug-min($color) {
+    @if $debug-min {
+        border-width: 1px;
+        border-color: $color;
+        border-style: solid;
+    }
+}
+
+$debug-1: true;
+// $debug-1: false;
+
+@mixin debug-1($color) {
+    @if $debug-1 {
+        border-width: 3px;
+        border-color: $color;
+        border-style: solid;
+    }
+}

@@ -1,0 +1,184 @@
+// Tree Style
+
+.list-tree-content {
+    @include debug-min(purple);
+    padding: 10px;
+    border-radius: 3px;
+    background: white;
+    border: none;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    height: 100%;
+    overflow-y: auto;
+    font-size: 0.9em;
+    color: #555;
+
+    .list-tree-collapse {
+        display: grid;
+        grid-template-rows: 2rem;
+        grid-auto-flow: row;
+        grid-auto-rows: 2rem;
+        align-items: center;
+
+        svg.jam {
+            width: 12px;
+            fill: #eee;
+        }
+
+    }
+
+    // Branches
+
+    .tree-branch {
+        height: 2rem;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+
+        .dashed-line-h {
+            border-top: 1px dashed #999;
+            width: 0.5rem;
+        }
+
+        svg.jam {
+            width: 20px;
+            fill: #ccc;
+        }
+    }
+
+    .add-main-branch {
+        align-items: center;
+        gap: 0.3rem;
+    }
+
+    
+    .add-sibling-branch {
+        display: flex;
+        // display: none;
+        flex-direction: column;
+        gap: 0;
+        position: absolute;
+        left: -0.6rem;
+        top: 16px;
+        height: 42px;
+        
+        .dashed-line-v {
+            border-left: 1px dashed #999;
+            flex: 1;
+        }   
+    }
+    
+    .add-child-branch {
+        // display: none;
+        gap: 0;
+        margin-left: 1.5rem;
+        
+        .dashed-line-v {
+            border-left: 1px dashed #999;
+            top: -16px;
+            position: relative;
+            left: 0;
+            height: 32px;
+        }
+        
+        .add-child-angled {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+    }
+    
+    .add-last-branch {
+
+        .dashed-line-v {
+            top: -1rem;
+            position: relative;
+            left: 0;
+            height: 32px;
+        }
+
+        .add-child-angled {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+           
+        }
+
+        &:before {
+            content: '';
+            position: absolute;
+            background: white;
+            height: 1rem;
+            bottom: 0;
+            width: 1px;
+        }
+
+        
+    }
+
+    // Tree Content
+
+    .tree-node-label {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+
+
+        svg.jam {
+            width: 16px;
+            background: #ccc;
+            border-radius: 50%;
+            fill: #fff;
+
+        }
+    }
+
+    ul {
+        // @include debug-1(green);
+        position: relative;
+        margin-left: 1.5rem;
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            border-left: 1px solid #bbb;
+        }
+
+
+
+        li {
+            line-height: 2rem;
+            position: relative;
+            padding-left: 1rem;
+
+        }
+
+        
+        li:before {
+            content: '';
+            display: block;
+            width: 0.6rem;
+            height: 0;
+            border-top: 1px solid #bbb;
+            position: absolute;
+            top: 1rem;
+            left: 0;
+        }
+        
+        li:last-child:before {
+            background: white;
+            height: auto;
+            top: 1rem;
+            bottom: 0;
+        }
+    }
+
+    ul.list-tree-root {
+        margin-left: 0.5rem;
+    }
+}

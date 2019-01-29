@@ -1,4 +1,5 @@
 import './public/styles/main.scss'
 
-const ran = 'App running...'
-console.log(`ran = ${ran}`)
+const app = 'App running...'
+const hmr = 'Test HMR'
+console.log(`ran = ${app}`)

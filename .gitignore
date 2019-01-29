@@ -1,5 +1,10 @@
+# custom
+
+/dist
+/.vscode
+
 # npm packages
-node_modules
+/node_modules
 
 # ignore node/grunt dependency directories
 node_modules/
@@ -14,6 +19,7 @@ node_modules/
 /_site
 
 # ignore OS generated files
+.DS_Store
 ehthumbs.db
 Thumbs.db
 
