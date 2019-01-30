@@ -10,7 +10,7 @@
         background: #f6f6f6;
         border-radius: 5px;
         display: grid;
-        grid-template-rows: auto 1fr auto;
+        grid-template-rows: auto 1fr;
         gap: 10px;
         box-shadow: 0px 1px 1px rgba( black, 0.4);
         
@@ -21,6 +21,7 @@
         }
     }
     
+    // Old Style
     .list-items {
         border-radius: 3px;
         background: #fff;
@@ -254,6 +255,7 @@
         display: flex;
         height: 352px;
         max-height: 100%;
+        width: 320px;
         border-radius: 5px;
         align-items: center;
         justify-content: center;

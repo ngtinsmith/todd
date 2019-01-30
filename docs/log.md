@@ -23,7 +23,7 @@ HMR - stubborn pita
 Schema: project & data
 export font
 use node_modules/ path for svg
-Release static boilerplate
+release static boilerplate
 
 ---
 
@@ -63,7 +63,7 @@ hidden submenus
         header - color label
         main menu
         item menu
-        todo-text overflow ellipsis (preset optimal char length)
+        todo-text overflow ellipsis (preset optimal char length) --> js auto-width
         add-new - auto scroll to first word / left most on focus exit
         draggable-y
 add new card area on last grid panel

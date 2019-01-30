@@ -1,12 +1,11 @@
 # MARKDOWN
 
-*123*
+*Italic*
+_Italic_
+`Backticks`
 **BOLD**
-***BOLD-i***
-`ASD`
-_QWE_
-__WASD__
-[QWERTY]
+__DOUBLE__
+[BRACKETS]
 
 ---
 

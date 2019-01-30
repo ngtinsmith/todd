@@ -3,6 +3,7 @@
 .workspace {
     @include debug(purple);
     background: #c3c3c3;
+    background: #646c72;
     font-size: 1rem;
     display: grid;
     grid-template-rows: auto 1fr;
@@ -12,9 +13,9 @@
         @include debug(yellow);
         display: grid;
         padding: 10px;
-        grid-template-columns: repeat(4, 320px);
+        grid-template-columns: 340px;
         grid-auto-flow: column;
-        grid-auto-columns: minmax(280px, 320px);
+        grid-auto-columns: minmax(340px, 480px);
         gap: 10px;
         overflow: hidden;
         overflow-x: auto;
@@ -32,7 +33,7 @@
     .ws-header-wrap {
         max-height: 48px;
         z-index: 4;
-        padding: 10px;
+        padding: 6px;
         display: flex;
         align-items: center;
     }
