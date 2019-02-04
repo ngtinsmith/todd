@@ -473,3 +473,79 @@ _layouts.scss
         margin-right: auto;
     }
 }
+
+
+I like the ducks structure, I would say something like this:
+
+├── assets
+├── common
+│  ├── mediaLibrary
+│  ├── dataTable
+│  ├── notifications
+│  ├── utils
+│  ├── containers
+│  ├── layout
+│  ├── sideMenu
+│  └── selectors
+├── ducks
+│  ├── combine.js
+│  ├── users.js
+│  ├── orders.js
+│  ├── items.js
+│  ├── auth.js
+│  └── subscriptions.js
+├── routes
+│  ├── App
+│  │  ├── App.scss
+│  │  ├── App.test.js
+│  │  └── index.js
+│  ├── Auth
+│  │  ├── Login
+│  │  │  ├── Login.test.js
+│  │  │  ├── Login.test.js
+│  │  │  └── index.js
+│  │  ├── ResetPassword
+│  │  │  ├── ResetPassword.test.js
+│  │  │  ├── ResetPassword.test.js
+│  │  │  └── index.js
+│  │  └── Signup
+│  │  │  ├── Signup.test.js
+│  │  │  ├── Signup.test.js
+│  │  │  └── index.js
+│  ├── Users
+│  │  ├── Users.scss
+│  │  ├── Users.test.js
+│  │  └── index.js
+├── services
+│  ├── api.js
+├── styles
+│  ├── index.scss
+│  ├── _global.scss
+│  ├── _typography.scss
+│  └── _forms.scss
+├── translations
+├── i18n.js
+├── index.js
+├── registerServiceWorker.js
+├── theme.js
+├── translations
+└── Tests
+│  ├── authTest.js
+│  ├── usersTest.js
+│  └── ordersTest.js
+
+
+# Porkify Schema
+
+Model
+    Likes
+    List
+    Recipe
+    Search
+View
+    helpers
+    likesView
+    listView
+    recipeView
+    searchView
+Controller

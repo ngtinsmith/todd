@@ -20,10 +20,22 @@
         cursor: pointer;
     }
     
-    // Parent Label
-    .list-tree-root > li > .node-content > .node-label > input {
+    // Node Content
+    .list-tree-root .node-label .node-text {
         color: #999;
         font-weight: 600;
+    }
+
+    .calc-label-width {
+        position: relative;
+        
+        span {
+            position: absolute;
+            font-weight: 600;
+            padding: 0 6px;
+            white-space: pre;
+            z-index: -1;
+        }
     }
 
     // Node Label
@@ -35,13 +47,23 @@
         display: flex;
         
         .node-label {
-            
             display: flex;
-            display: grid;
-            grid-template-columns: auto 1fr auto;
+            // display: grid;
+            // grid-template-columns: auto 1fr auto;
             align-items: center;
             gap: 0.3rem;
             
+            .node-text {
+                width: 50px;
+                min-width: 130px;
+                padding: 3px 6px;
+                border-radius: 3px;
+
+                &:focus-within {
+                    background: #f9f9f9;
+                }
+            }
+
             .node-dash {
                 width: 0.5rem;
                 border-top: 1px solid #aaa;
@@ -58,31 +80,26 @@
                     fill: #fff;
                 }
             }
-
-            input {
-                // background: cyan;
-                width: 80px;
-                padding: 3px 4px;
-                border-radius: 3px;
-                
-                &:focus-within {
-                    background: #f9f9f9;
-                    
-                }
-            }
         }
         
+        
         .branch-view {
-            // @include debug-min(red);
+            // @include debug-min(blue);
             position: absolute;
             height: 100%;
             left: -1.2rem;
             display: flex;
             align-items: center;
+            pointer-events: none;
             
             svg.jam {
                 width: 14px;
                 fill: #999;
+                pointer-events: fill;
+
+                path {
+                    pointer-events: none;
+                }
             }
             
             &.is-collapsed svg.jam {
@@ -106,12 +123,29 @@
             border-left: 1px solid #999;
         }
 
-        li {
-            // line-height: 2rem;
-            position: relative;
+        &.list-tree-root {
+            margin-left: 1rem;
         }
-        
-        li:last-child:before {
+    }
+
+    li {
+        position: relative;
+
+        &.is-collapsed {
+            ul,
+            .add-main-branch {
+                display: none;
+            }
+            
+            .add-sibling-branch {
+                position: relative;
+                &:not(.has-descendant) {
+                    display: none;
+                }
+            }
+        }
+
+        &:last-child:before {
             content: '';
             background: white;
             position: absolute;
@@ -120,10 +154,6 @@
             bottom: 0;
             width: 1px;
         }
-    }
-
-    ul.list-tree-root {
-        margin-left: 1rem;
     }
 
     // New Branch
@@ -147,7 +177,6 @@
             fill: #ffd2d2;
             fill: #ddd;
             fill: #f6f6f6;
-            
         }
     }
 
@@ -185,7 +214,6 @@
     .add-child-branch {
         display: flex;
         gap: 0.1rem;
-        // display: none;
 
         .dashed-line-h {
             width: 1rem;

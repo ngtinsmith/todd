@@ -1,8 +1,9 @@
 [__TODO_FEATURES__]
 
+**git EXCLUDE ENV/CONFIG DIRECTORY**
 <!-- Overflow-y cards -->
 Collapsable sidebar
-Collapsable sub-todo items
+<!-- Collapsable sub-todo items -->
 List card ~ width density (auto/manual depending on content)
 List item ~ height density (normal/compact/wide)
 List progress (progress element)
@@ -22,8 +23,9 @@ Undo / Rollback up to x-days
 HMR - stubborn pita
 Schema: project & data
 export font
-use node_modules/ path for svg
+<!-- use node_modules path for svg = fucking tilde '~' -->
 release static boilerplate
+
 
 ---
 
@@ -59,11 +61,11 @@ hidden submenus
     <!-- ws-header dropdown -->
     <!-- workspace settings -->
     auto viewport placement
-    list
+    tree-list
         header - color label
-        main menu
+        <!-- main menu >> sidebar now -->
         item menu
-        todo-text overflow ellipsis (preset optimal char length) --> js auto-width
+        node-text overflow ellipsis 
         add-new - auto scroll to first word / left most on focus exit
         draggable-y
 add new card area on last grid panel
@@ -78,7 +80,7 @@ add new card area on last grid panel
         new ws-header layout (?)
 modular grid
     allow easy component integration
-    set default padding and sizing
+    set default area and sizing
 subtle (active & hover) circle bg shade on SVG icons
 draggable-x workspace
 draggable-list/card
@@ -90,9 +92,32 @@ mix-blend-mode
 
 [__WIP_UX__]
 
+TreeDOM
+    <!-- collapse/expand -->
+    <!-- node text auto-width -->
+    add main branch
+    add sibling branch
+    add child branch
+    delete branch
+    enter key = auto add new branch ui
+    toggle node
 ES6+
 Component based
 index.js / Hooks (?)
+
+---
+
+[__APP_SCHEMA__]
+
+feature
+    components
+        view
+        model
+        .js
+        
+core / controller
+
+
 
 ---
 

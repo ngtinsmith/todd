@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const webpack = require('webpack')
 const HtmlWebpackInlineSVGPlugin = require('html-webpack-inline-svg-plugin')
+// const url = 'node_modules/jam-icons/svg/'
 
 module.exports = {
     entry: './src/index.js',
@@ -23,7 +24,7 @@ module.exports = {
      * dev  - eval-source-map
      *        cheap-module-eval-source-map 
      * prod - source-map
-*             inline-source-map
+     *        inline-source-map
      **/
     devtool: "source-map",
     module: {
@@ -80,6 +81,8 @@ module.exports = {
 
             /* SVG Loader
              * 
+             * [path] = relative to template url: 
+             * e.g, if template is in src/public/index.html then [path] = src/public/
              * [path] is prefixed to "name" to allow html template
              * pre-parsing with inline-svg-plugin
              * 

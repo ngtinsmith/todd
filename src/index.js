@@ -1,5 +1,13 @@
-import './public/styles/main.scss'
+import './public/styles'
+import { _init } from './app/_init'
 
-const app = 'App running...'
-const hmr = 'Test HMR'
-console.log(`ran = ${app}`)
+/* Main Entry Point
+    
+    Styles
+    Bootstrap
+    App.js(?)
+*/
+
+_init()
+
+console.log(`App running...`)
