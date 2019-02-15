@@ -1,18 +1,19 @@
 .header {
     display: flex;
-    background: $bg-header;
+    background: #b73084;
+    background: #494c5c;
     position: relative;
     z-index: 5;
 }
 
 // Header Item Wrapper
-
 .header-items { 
     display: flex;
     flex: 1;
 
     &:nth-child(2) {
         justify-content: center;
+        max-width: 80px;
     }
 
     &:nth-child(3) {
@@ -21,7 +22,6 @@
 }
 
 // Header Item - Menu
-
 .header-menu {
     display: flex;
     align-items: center;
@@ -37,11 +37,10 @@
     }
 }
 
-
-
+// Header Search Bar
 .menu-search {
     background: $bg-search;
-    padding: 6px 8px;
+    padding: 4px 8px;
     border-radius: 3px;
     display: flex;
     align-items: center;
@@ -57,13 +56,12 @@
 
     svg.jam-search {
         width: 18px;
-        fill: $search-icon;
+        fill: #494c5c;
         cursor: pointer;
     }
 }
 
 // Header Item - Logo
-
 .header-logo {
     display: flex;
     align-items: center;
@@ -84,11 +82,10 @@
 }
 
 // Header Item - User
-
 .header-user {
     display: flex;
     align-items: center;
-    padding-right: 8px;
+    padding-right: 0.3rem;
     position: relative;
 
     svg {
@@ -130,23 +127,24 @@
     }
 }
 
+// User Toggle
 .user-options {
     display: none;
     position: absolute;
-    top: 48px;
+    top: 3rem;
     right: 10px;
     z-index: 1;
     
     &::after {
         content: " ";
         background: #e9e9e9;
+        background: #fcfcfc;
         position: absolute;
         top: -2px;
-        right: 13px;
-        width: 15px;
-        height: 15px;
+        right: 0.9rem;
+        width: 0.5rem;
+        height: 0.5rem;
         transform: rotate(135deg);
-        z-index: -1;
     }
     
     .user-opt-wrap {
@@ -154,8 +152,10 @@
         top: 4px;
         width: 240px;
         background: #e9e9e9;
+        background: #fcfcfc;
         border-radius: 5px;
         box-shadow: 0px 4px 2px -1px rgba(0, 0, 0, 0.3);
+        box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.3);
         
     }   
 }

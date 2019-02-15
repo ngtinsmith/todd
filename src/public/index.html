@@ -174,11 +174,34 @@
                     <div class="list">
                         <div class="list-content">
 
-                                <div class="list-header">
-                                    <img inline src="~jam-icons/svg/circle-f.svg">
-                                    <input class="list-title" type="text" placeholder="Enter Title Here">
-                                    <img inline src="~jam-icons/svg/pin-f.svg">
-                                    <img inline src="~jam-icons/svg/more-horizontal.svg">
+                                <div class="list-header js-list-header">
+                                    <div class="ls-header-primary">
+                                        <img inline src="~jam-icons/svg/circle-f.svg">
+                                        <input class="list-title" type="text" value="Node Title" placeholder="Node Title...">
+                                    </div>
+
+                                    <!-- node_modules/@mdi/svg/svg/access-point-network-off.svg -->
+                                    <div class="ls-header-secondary">
+                                        <!-- <div class="toolbar-btn">
+                                            <img inline src="~@mdi/svg/svg/file-tree.svg">
+                                            <img inline src="~@mdi/svg/svg/subdirectory-arrow-right.svg">
+                                        </div> -->
+                                        <div class="toolbar-btn">
+                                            <img inline src="~jam-icons/svg/pin-f.svg">
+                                        </div>
+                                        <div class="toolbar-btn">
+                                            <img inline src="~jam-icons/svg/arrow-left.svg">
+                                        </div>
+                                        <div class="toolbar-btn">
+                                            <img inline src="~jam-icons/svg/arrow-right.svg">
+                                        </div>
+                                        <div class="toolbar-btn">
+                                            <img inline src="~jam-icons/svg/padlock-f.svg">
+                                        </div>
+                                        <div class="toolbar-btn">
+                                            <img inline src="~jam-icons/svg/more-horizontal-f.svg">
+                                        </div>
+                                    </div>
                                     <div class="ls-options">
                                         Copy List
                                         Sort
@@ -195,125 +218,129 @@
                                 </div>
 
                                 <div class="list-tree">
+                                    <div class="modal-confirmation js-modal-confirm">
+                                        <div class="modal-content">
+                                            <h3 class="modal-heading">Delete this node?</h3>
+                                            <div class="modal-description">
+                                                <p>
+                                                    This node contains
+                                                    <span class="modal-sub-nodes">
+                                                        <span class="modal-sub-count">5</span>
+                                                        sub-<span class="modal-sub-quantity">nodes</span></span>.
+                                                </p>
+                                                <p>Deleting this will delete all those nodes.</p>
+                                            </div>
+                                            <div class="modal-buttons">
+                                                <button class="modal-btn modal-cancel">Cancel</button>
+                                                <button class="modal-btn modal-delete">Delete</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="list-tree-content">
                                         
                                         <ul class="list-tree-root">
                                             <div class="calc-label-width"><span></span></div>
                                             <li class="is-expanded">
-                                            <!-- <li class="is-collapsed">  -->
-                                                <div class="node-content">
-                                                    <div class="branch-view js-branch-collapse">
-                                                        <img inline src="~jam-icons/svg/minus-rectangle.svg">
-                                                    </div>
+                                                <div class="node-content js-node-content">
                                                     <div class="node-label">
                                                         <span class="node-dash"></span>
                                                         <img inline src="~jam-icons/svg/check.svg">
-                                                        <input class="node-text" type="text" value="Node 1" placeholder="Enter New Item...">
+                                                        <input class="node-text" type="text" value="List Card" placeholder="Enter New Item...">
                                                     </div>
                                                 </div>
                                                 <ul>
-                                                    <li class="is-collapsed">
-                                                        <div class="node-content">
-                                                            <div class="branch-view js-branch-collapse">
-                                                                <img inline src="~jam-icons/svg/plus-rectangle-f.svg">
-                                                            </div>
-                                                            <div class="node-label">
-                                                                <span class="node-dash"></span>
-                                                                <img inline src="~jam-icons/svg/check.svg">
-                                                                <input class="node-text" type="text" value="Node 1.1">
-                                                            </div>
-                                                            <div class="new-branch add-child-branch">
-                                                                <div class="dashed-line-h"></div>
-                                                                <img inline src="~jam-icons/svg/plus-circle.svg">
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="node-content">
-                                                            <div class="node-label">
-                                                                <span class="node-dash"></span>
-                                                                <img inline src="~jam-icons/svg/check.svg">
-                                                                <input class="node-text" type="text" value="Node 1.2">
-                                                            </div>
-                                                        </div>
-                                                    </li>
                                                     <li class="is-expanded">
-                                                        <div class="node-content">
-                                                            <div class="branch-view is-collapsed js-branch-collapse">
-                                                                <img inline src="~jam-icons/svg/minus-rectangle.svg">
-                                                            </div>
+                                                        <div class="node-content js-node-content">
                                                             <div class="node-label">
                                                                 <span class="node-dash"></span>
                                                                 <img inline src="~jam-icons/svg/check.svg">
-                                                                <input class="node-text" type="text" value="Node 1.3">
+                                                                <input class="node-text" type="text" value="Header">
                                                             </div>
-                                                        </div>
-                                                        <div class="new-branch add-sibling-branch has-descendant">
-                                                                <div class="dashed-line-v"></div>
-                                                                <div class="add-child-angled">
-                                                                    <div class="dashed-line-h"></div>
-                                                                    <img inline src="~jam-icons/svg/plus-circle-f.svg">
-                                                                </div>
                                                         </div>
                                                         <ul>
                                                             <li>
-                                                                <div class="node-content">
+                                                                <div class="node-content js-node-content">
                                                                     <div class="node-label">
                                                                         <span class="node-dash"></span>
                                                                         <img inline src="~jam-icons/svg/check.svg">
-                                                                        <input class="node-text" type="text" value="Node 1.3.1">
+                                                                        <input class="node-text" type="text" value="root node (title) toggle">
                                                                     </div>
                                                                 </div>
                                                             </li>
                                                             <li>
-                                                                <div class="node-content">
-                                                                    <div class="branch-view js-branch-collapse">
-                                                                        <img inline src="~jam-icons/svg/plus-rectangle-f.svg">
-                                                                    </div>
+                                                                <div class="node-content js-node-content">
                                                                     <div class="node-label">
                                                                         <span class="node-dash"></span>
                                                                         <img inline src="~jam-icons/svg/check.svg">
-                                                                        <input class="node-text" type="text" value="Node 1.3.2">
+                                                                        <input class="node-text" type="text" value="pin button">
                                                                     </div>
                                                                 </div>
                                                             </li>
                                                             <li>
-                                                                <div class="node-content">
-                                                                    <div class="branch-view js-branch-collapse">
-                                                                        <img inline src="~jam-icons/svg/plus-rectangle-f.svg">
-                                                                    </div>
+                                                                <div class="node-content js-node-content">
                                                                     <div class="node-label">
                                                                         <span class="node-dash"></span>
                                                                         <img inline src="~jam-icons/svg/check.svg">
-                                                                        <input class="node-text" type="text" value="Node 1.3.3">
-                                                                    </div>
-                                                                    <div class="new-branch add-child-branch">
-                                                                        <div class="dashed-line-h"></div>
-                                                                        <img inline src="~jam-icons/svg/plus-circle.svg">
+                                                                        <input class="node-text" type="text" value="undo/redo">
                                                                     </div>
                                                                 </div>
                                                             </li>
                                                         </ul>
-                                                        <div class="new-branch add-sibling-branch">
-                                                                <div class="dashed-line-v"></div>
-                                                                <div class="add-child-angled">
-                                                                    <div class="dashed-line-h"></div>
-                                                                    <img inline src="~jam-icons/svg/plus-circle-f.svg">
-                                                                </div>
+                                                    </li>
+                                                    <li class="is-expanded">
+                                                        <div class="node-content js-node-content">
+                                                            <div class="node-label">
+                                                                <span class="node-dash"></span>
+                                                                <img inline src="~jam-icons/svg/check.svg">
+                                                                <input class="node-text" type="text" value="UI">
+                                                            </div>
                                                         </div>
+                                                        <ul>
+                                                            <li class="is-expanded">
+                                                                <div class="node-content js-node-content">
+                                                                    <div class="node-label">
+                                                                        <span class="node-dash"></span>
+                                                                        <img inline src="~jam-icons/svg/check.svg">
+                                                                        <input class="node-text" type="text" value="refer to terminal tree style">
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="is-expanded">
+                                                        <div class="node-content js-node-content">
+                                                            <div class="node-label">
+                                                                <span class="node-dash"></span>
+                                                                <img inline src="~jam-icons/svg/check.svg">
+                                                                <input class="node-text" type="text" value="Events">
+                                                            </div>
+                                                        </div>
+                                                        <ul>
+                                                            <li class="is-expanded">
+                                                                <div class="node-content js-node-content">
+                                                                    <div class="node-label">
+                                                                        <span class="node-dash"></span>
+                                                                        <img inline src="~jam-icons/svg/check.svg">
+                                                                        <input class="node-text" type="text" value="Event Types">
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="node-content js-node-content">
+                                                                    <div class="node-label">
+                                                                        <span class="node-dash"></span>
+                                                                        <img inline src="~jam-icons/svg/check.svg">
+                                                                        <input class="node-text" type="text" value="Input State">
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
                                                     </li>
                                                 </ul>
-                                                <div class="new-branch add-main-branch">
-                                                    <div class="dashed-line-h"></div>
-                                                    <img inline src="~jam-icons/svg/plus-circle-f.svg">
-                                                </div>
                                             </li> <!-- main-node-branch -->
                                             
                                             <li class="is-expanded">
-                                                <div class="node-content">
-                                                    <div class="branch-view is-collapsed js-branch-collapse">
-                                                        <img inline src="~jam-icons/svg/minus-rectangle.svg">
-                                                    </div>
+                                                <div class="node-content js-node-content">
                                                     <div class="node-label">
                                                         <span class="node-dash"></span>
                                                         <img inline src="~jam-icons/svg/check.svg">
@@ -321,80 +348,29 @@
                                                     </div>
                                                 </div>
                                                 <ul>
-                                                    <li>
-                                                        <div class="node-content">
-                                                            <div class="branch-view is-collapsed js-branch-collapse">
-                                                                <img inline src="~jam-icons/svg/plus-rectangle-f.svg">
-                                                            </div>
-                                                            <div class="node-label">
-                                                                <span class="node-dash"></span>
-                                                                <img inline src="~jam-icons/svg/check.svg">
-                                                                <input class="node-text" type="text" value="Node 2.1">
-                                                            </div>
-                                                            <div class="new-branch add-child-branch">
-                                                                <div class="dashed-line-h"></div>
-                                                                <img inline src="~jam-icons/svg/plus-circle.svg">
-                                                            </div>
-                                                        </div>
-                                                    </li>
                                                     <li class="is-expanded">
-                                                        <div class="node-content">
-                                                            <div class="branch-view is-collapsed js-branch-collapse">
-                                                                <img inline src="~jam-icons/svg/minus-rectangle.svg">
-                                                            </div>
+                                                        <div class="node-content js-node-content">
                                                             <div class="node-label">
                                                                 <span class="node-dash"></span>
                                                                 <img inline src="~jam-icons/svg/check.svg">
-                                                                <input class="node-text" type="text" value="Node 2.2">
-                                                            </div>
-                                                        </div>
-                                                        <ul>
-                                                            <li>
-                                                                <div class="node-content">
-                                                                    <div class="node-label">
-                                                                        <span class="node-dash"></span>
-                                                                        <img inline src="~jam-icons/svg/check.svg">
-                                                                        <input class="node-text" type="text" value="Node 2.2.1">
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="new-branch add-sibling-branch">
-                                                            <div class="dashed-line-v"></div>
-                                                            <div class="add-child-angled">
-                                                                <div class="dashed-line-h"></div>
-                                                                <img inline src="~jam-icons/svg/plus-circle-f.svg">
+                                                                <input class="node-text" type="text" value="create bulk node and attach once">
                                                             </div>
                                                         </div>
                                                     </li>
                                                     <li>
-                                                        <div class="node-content">
+                                                        <div class="node-content js-node-content">
                                                             <div class="node-label">
                                                                 <span class="node-dash"></span>
                                                                 <img inline src="~jam-icons/svg/check.svg">
-                                                                <input class="node-text" type="text" value="Node 3">
+                                                                <input class="node-text" type="text" value="context switching is expensive">
                                                             </div>
                                                         </div>
                                                     </li>
                                                 </ul>
-                                                <div class="new-branch add-main-branch">
-                                                    <div class="dashed-line-h"></div>
-                                                    <img inline src="~jam-icons/svg/plus-circle-f.svg">
-                                                </div>
-                                                <div class="new-branch add-sibling-branch">
-                                                    <div class="dashed-line-v"></div>
-                                                    <div class="add-child-angled">
-                                                        <div class="dashed-line-h"></div>
-                                                        <img inline src="~jam-icons/svg/plus-circle-f.svg">
-                                                    </div>
-                                                </div>
                                             </li> <!-- main-node-branch -->
 
                                             <li class="is-expanded">
-                                                <div class="node-content">
-                                                    <div class="branch-view is-collapsed js-branch-collapse">
-                                                        <img inline src="~jam-icons/svg/minus-rectangle.svg">
-                                                    </div>
+                                                <div class="node-content js-node-content">
                                                     <div class="node-label">
                                                         <span class="node-dash"></span>
                                                         <img inline src="~jam-icons/svg/check.svg">
@@ -403,133 +379,36 @@
                                                 </div>
                                                 <ul>
                                                     <li>
-                                                        <div class="node-content">
+                                                        <div class="node-content js-node-content">
                                                             <div class="node-label">
                                                                 <span class="node-dash"></span>
                                                                 <img inline src="~jam-icons/svg/check.svg">
-                                                                <input class="node-text" type="text" value="Node 3.1">
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="node-content">
-                                                            <div class="branch-view is-collapsed js-branch-collapse">
-                                                                <img inline src="~jam-icons/svg/plus-rectangle-f.svg">
-                                                            </div>
-                                                            <div class="node-label">
-                                                                <span class="node-dash"></span>
-                                                                <img inline src="~jam-icons/svg/check.svg">
-                                                                <input class="node-text" type="text" value="Node 3.2">
+                                                                <input class="node-text" type="text" value="cache/reference DOM nodes">
                                                             </div>
                                                         </div>
                                                     </li>
                                                     <li class="is-expanded">
-                                                        <div class="node-content">
-                                                            <div class="branch-view is-collapsed js-branch-collapse">
-                                                                <img inline src="~jam-icons/svg/minus-rectangle.svg">
-                                                            </div>
+                                                        <div class="node-content js-node-content">
                                                             <div class="node-label">
                                                                 <span class="node-dash"></span>
                                                                 <img inline src="~jam-icons/svg/check.svg">
-                                                                <input class="node-text" type="text" value="Node 3.3">
+                                                                <input class="node-text" type="text" value="addSibling: editMode opacity < 1 ">
                                                             </div>
-                                                        </div>
-                                                        <div class="new-branch add-sibling-branch has-descendant">
-                                                                <div class="dashed-line-v"></div>
-                                                                <div class="add-child-angled">
-                                                                    <div class="dashed-line-h"></div>
-                                                                    <img inline src="~jam-icons/svg/plus-circle-f.svg">
-                                                                </div>
                                                         </div>
                                                         <ul>
                                                             <li>
-                                                                <div class="node-content">
-                                                                    <div class="branch-view is-collapsed js-branch-collapse">
-                                                                        <img inline src="~jam-icons/svg/minus-rectangle.svg">
-                                                                    </div>
+                                                                <div class="node-content js-node-content">
                                                                     <div class="node-label">
                                                                         <span class="node-dash"></span>
                                                                         <img inline src="~jam-icons/svg/check.svg">
-                                                                        <input class="node-text" type="text" value="Node 3.3.1">
+                                                                        <input class="node-text" type="text" value="to increase on hover">
                                                                     </div>
                                                                 </div>
                                                             </li>
                                                         </ul>
-                                                        <div class="new-branch add-sibling-branch">
-                                                            <div class="dashed-line-v"></div>
-                                                            <div class="add-child-angled">
-                                                                <div class="dashed-line-h"></div>
-                                                                <img inline src="~jam-icons/svg/plus-circle-f.svg">
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                                
-                                                <div class="new-branch add-main-branch">
-                                                    <div class="dashed-line-h"></div>
-                                                    <img inline src="~jam-icons/svg/plus-circle-f.svg">
-                                                </div>
-                                            </li> <!-- main-node-branch -->
-
-                                            <li class="is-expanded">
-                                                <div class="node-content">
-                                                    <div class="branch-view is-collapsed js-branch-collapse">
-                                                        <img inline src="~jam-icons/svg/minus-rectangle.svg">
-                                                    </div>
-                                                    <div class="node-label">
-                                                        <span class="node-dash"></span>
-                                                        <img inline src="~jam-icons/svg/check.svg">
-                                                        <input class="node-text" type="text" value="Node 4">
-                                                    </div>
-                                                    
-                                                </div>
-                                                <ul>
-                                                    <li>
-                                                        <div class="node-content">
-                                                            <div class="branch-view is-collapsed js-branch-collapse">
-                                                                <img inline src="~jam-icons/svg/plus-rectangle-f.svg">
-                                                            </div>
-                                                            <div class="node-label">
-                                                                <span class="node-dash"></span>
-                                                                <img inline src="~jam-icons/svg/check.svg">
-                                                                <input class="node-text" type="text" value="Node 4.1">
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="node-content">
-                                                            <div class="branch-view is-collapsed js-branch-collapse">
-                                                                <img inline src="~jam-icons/svg/plus-rectangle-f.svg">
-                                                            </div>
-                                                            <div class="node-label">
-                                                                <span class="node-dash"></span>
-                                                                <img inline src="~jam-icons/svg/check.svg">
-                                                                <input class="node-text" type="text" value="Node 4.2">
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="node-content">
-                                                            <div class="branch-view is-collapsed js-branch-collapse">
-                                                                <img inline src="~jam-icons/svg/plus-rectangle-f.svg">
-                                                            </div>
-                                                            <div class="node-label">
-                                                                <span class="node-dash"></span>
-                                                                <img inline src="~jam-icons/svg/check.svg">
-                                                                <input class="node-text" type="text" value="Node 4.3">
-                                                            </div>
-                                                        </div>
                                                     </li>
                                                 </ul>
                                             </li> <!-- main-node-branch -->
-
-                                            <div class="new-branch add-last-branch">
-                                                    <div class="dashed-line-v"></div>
-                                                    <div class="add-child-angled">
-                                                        <div class="dashed-line-h"></div>
-                                                        <img inline src="~jam-icons/svg/plus-circle-f.svg">
-                                                    </div>
-                                            </div> <!-- add-new-branch -->
 
                                         </ul> <!-- list-tree-root -->
                                     </div> <!-- list-tree-content -->

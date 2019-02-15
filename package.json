@@ -34,6 +34,7 @@
     "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {
+    "@mdi/svg": "^3.4.93",
     "jam-icons": "^2.0.0",
     "normalize.css": "^8.0.1"
   }

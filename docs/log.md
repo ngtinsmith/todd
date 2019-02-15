@@ -25,7 +25,7 @@ Schema: project & data
 export font
 <!-- use node_modules path for svg = fucking tilde '~' -->
 release static boilerplate
-
+babel safe X polyfill
 
 ---
 
@@ -68,10 +68,11 @@ hidden submenus
         node-text overflow ellipsis 
         add-new - auto scroll to first word / left most on focus exit
         draggable-y
+list width UI: add allowance for hover addButtons ***
 add new card area on last grid panel
 <!-- new todo item full-width + btn -->
 <!-- layout debug function ~ debug(color) -->
-    separate debug triggers
+<!-- separate debug triggers -->
 <!-- sidebar -->
     collapse to icon panel
     link --> display content to panel
@@ -95,12 +96,22 @@ mix-blend-mode
 TreeDOM
     <!-- collapse/expand -->
     <!-- node text auto-width -->
+    <!-- dynamic branchView generator function -->
+    <!-- show add-btn's on toggle -->
+    insert after main-branch-node
+    auto list wrapper width
+    async attach
+    js-html hooks
     add main branch
     add sibling branch
     add child branch
     delete branch
     enter key = auto add new branch ui
-    toggle node
+    toggle check node 
+    undo
+    distraction free
+    sync animation (async mode)
+Benchmark Tools
 ES6+
 Component based
 index.js / Hooks (?)
@@ -124,7 +135,7 @@ core / controller
 [__BUGS__]
 
 can't apply right-margin/padding on last overflow card
-checkbox-svg resizing when overflow-y/scrollbar is visible
+<!-- checkbox-svg resizing when overflow-y/scrollbar is visible -->
 chrome x-scrollbar takes-up bottom padding space
 
 ---

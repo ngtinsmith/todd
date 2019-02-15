@@ -1,117 +1,213 @@
-// Tree Style
+/* Colors */
+$text-color-dark: #aeaeae;
+$text-color-light: #555;
+$input-bg-color-dark: #3c3c3c;
+$input-bg-color-light: #f8f8f8;
+$tree-content-bg-light: #fcfcfc;
+$tree-content-bg-dark: #303030;
+
+/* Text Color */
+$text-color: $text-color-light;
+$input-bg-color: $input-bg-color-light;
+$input-bg-color-focus: #383838;
+
+/* Tree BG */
+$bg-color-light: #f9f9f9;
+$bg-color-dark: #2c2c2c;
+
+$bg-primary: $bg-color-dark;
+$tree-content-bg: $bg-color-dark;
+
+/* Node Sizing */
+$node-content-height: 1.5rem;
+$excess-line-top: calc(#{$node-content-height} / 2);            //  0.75
+$node-height-half-negative: calc(#{$excess-line-top} * -1);     // -0.75
+// $add-sibling-vline-height: 1.2rem;
+
+/* Node Solid Line & Dash */
+$line-color-vertical: #666;
+$line-color-horizontal: #888;
+$excess-line-cover-color: $bg-color-dark;
+
+/* Node Content */
+$text-bg-light: #f9f9f9;
+$text-color-light: #636363;
+$text-color-dark: #d7d7d7;
+
+$node-text-color: $text-color-dark;
+$node-text-bg: none;
+$node-text-bg-focus: $input-bg-color-focus;
+$node-text-color-focus: #fff;
+$node-text-weight: 400;
+$node-text-size: 0.8rem;
+$node-text-padding: 1px 5px;
+
+/* Node Check Toggle */
+$toggle-check-size: 0.9rem;
+$toggle-check-bg: #4a4a4a;
+$toggle-check-hover-bg: #fca4a4;
+$toggle-check-hover-fill: #fff;
+
+// Tree Container
+.list-tree {
+    background: #000;
+    position: relative;
+}
+
+// Modal
+.modal-confirmation {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    opacity: 1;
+    z-index: 99999999999999999;
+    user-select: none;
+    pointer-events: visible;
+
+    &.is-open {
+        display: flex;
+    }
+    
+    .modal-content {
+        background: #efefef;
+        border-radius: 5px;
+        display: grid;
+        gap: 15px;
+        padding: 10px 10px 15px 10px;
+        margin-bottom: 48px;
+        color: #444;
+        text-align: center;
+        box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.4);
+
+        .modal-description {
+            font-size: 0.8rem;
+            white-space: nowrap;
+
+            p:first-child {
+                margin-bottom: 5px;
+            }
+
+            .modal-sub-nodes {
+                color: #4f8bcf;
+                font-weight: 600;
+            }
+        }
+
+        @at-root .modal-buttons {
+            margin-top: 5px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+
+            .modal-btn {
+                border: 0;
+                padding: 5px 10px;
+                border-radius: 3px;
+                font-weight: 600;
+                font-size: 0.9rem;
+                cursor: pointer;
+
+                &:active, &:focus {
+                    outline: none;
+                }
+                
+                &.modal-cancel {
+                    background: #efefef;
+                    border: 1px solid #888;
+                    color: #666;
+                    
+                    &:hover {
+                        color: #545454;
+                        color: #3f3e3e;
+                        border: 1px solid #777;
+                    }
+                    
+                    &:active {
+                        color: #1d1d1d;
+                    }
+                }
+                
+                &.modal-delete {
+                    background: #ff6969;
+                    color: #efefef;
+                    
+                    &:hover {
+                        background: #fc5050;
+                    }
+                    
+                    &:active {
+                        background: #fe3e3e;
+                    }
+                }
+            }
+        }
+    }
+}
 
 .list-tree-content {
-    @include debug-min(purple);
+    border: 1px solid purple;
     padding: 10px;
     border-radius: 3px;
-    background: white;
+    background: $tree-content-bg;
     border: none;
-    display: grid;
-    grid-template-columns: 0.6rem 1fr;
     height: 100%;
     overflow-y: auto;
-    font-size: 0.9em;
+    position: relative;
     
-    input {
-        color: #888;
+    @at-root ul.list-tree-root { 
+        display: grid;
+        margin-bottom: 10px;
+
+        &.edit-mode {
+
+            .node-content {
+            
+                &:hover {
+                    background: #353535;
+                    border-radius: 0px 3px 3px 0px;
+
+                    .add-new-node {
+                        display: flex;
+                        position: absolute;
+                        right: 5px;
+                    }
+                }
+                
+
+                &.is-muted:hover {
+                    background: none;
+
+                    .add-new-node {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        &.is-muted {
+            pointer-events: none;
+            
+            &:hover {
+                pointer-events: none;
+
+            }
+        }
     }
 
     svg.jam {
         cursor: pointer;
-    }
-    
-    // Node Content
-    .list-tree-root .node-label .node-text {
-        color: #999;
-        font-weight: 600;
-    }
 
-    .calc-label-width {
-        position: relative;
-        
-        span {
-            position: absolute;
-            font-weight: 600;
-            padding: 0 6px;
-            white-space: pre;
-            z-index: -1;
-        }
-    }
-
-    // Node Label
-    .node-content {
-        height: 2rem;
-        position: relative;
-        width: 100px;
-        max-width: 200px;
-        display: flex;
-        
-        .node-label {
-            display: flex;
-            // display: grid;
-            // grid-template-columns: auto 1fr auto;
-            align-items: center;
-            gap: 0.3rem;
-            
-            .node-text {
-                width: 50px;
-                min-width: 130px;
-                padding: 3px 6px;
-                border-radius: 3px;
-
-                &:focus-within {
-                    background: #f9f9f9;
-                }
-            }
-
-            .node-dash {
-                width: 0.5rem;
-                border-top: 1px solid #aaa;
-            }
-
-            svg.jam {
-                width: 16px;
-                background: #eee;
-                border-radius: 50%;
-                fill: none;
-                
-                &:hover {
-                    background: #fca4a4;
-                    fill: #fff;
-                }
-            }
-        }
-        
-        
-        .branch-view {
-            // @include debug-min(blue);
-            position: absolute;
-            height: 100%;
-            left: -1.2rem;
-            display: flex;
-            align-items: center;
+        path {
             pointer-events: none;
-            
-            svg.jam {
-                width: 14px;
-                fill: #999;
-                pointer-events: fill;
-
-                path {
-                    pointer-events: none;
-                }
-            }
-            
-            &.is-collapsed svg.jam {
-                fill: #bbb;
-            }
         }
     }
-    
+
     // Descendants
     ul {
         position: relative;
-        margin-left: 3.4rem;
+        margin-left: 2.4rem;
 
         &:before {
             content: '';
@@ -120,11 +216,12 @@
             bottom: 0;
             left: 0;
             width: 0;
-            border-left: 1px solid #999;
+            border-left: 1px solid $line-color-vertical;
+            z-index: 1;
         }
 
         &.list-tree-root {
-            margin-left: 1rem;
+            margin-left: 1.2rem;
         }
     }
 
@@ -132,13 +229,15 @@
         position: relative;
 
         &.is-collapsed {
-            ul,
-            .add-main-branch {
+
+            ul, .add-main-branch {
                 display: none;
             }
             
-            .add-sibling-branch {
+            .add-sibling-branch,
+            .add-test-branch {
                 position: relative;
+
                 &:not(.has-descendant) {
                     display: none;
                 }
@@ -147,110 +246,231 @@
 
         &:last-child:before {
             content: '';
-            background: white;
+            background: $excess-line-cover-color;
             position: absolute;
             height: auto;
-            top: 1rem;
+            top: $excess-line-top;
             bottom: 0;
             width: 1px;
+            z-index: 2;
         }
     }
 
-    // New Branch
-    .new-branch {
-        height: 2rem;
-        display: grid;
-        grid-template-columns: auto 1fr;
+    .calc-label-width {
+        position: relative;
+        
+        /*  font-size and font-weight handled in JS
+            uncomment "position, z-index, and opacity" for testing
+        */
+        span {
+            position: absolute;
+            z-index: -1;
+            // position: relative;
+            // z-index: 999;
+            // opacity: 0;
+            color: #fff;
+            background: #444;
+            padding: $node-text-padding;
+            white-space: pre;
+        }
+    }
+
+    // Primary Node Highlight
+    .list-tree-root > li > .node-content > .node-label > .node-text {
+        background: #414768;
+        background: #9f0a7e;
+        background: #f5f5f5;
+        color: #f5f5f5;
+        color: #353535;
+        font-weight: 600;
+        
+        &:focus {
+            background: #394068;
+            background: #8a066d;
+            background: #f8f8f8;
+            color: #fff;
+            color: #1b1b1b;
+        }
+    }
+
+    // Node Label
+    .node-content {
+        height: $node-content-height;
+        position: relative;
+        display: flex;
+        z-index: 0;
+        margin-right: 10px;
+        
+        // temporary grid due to lack of 'gap' support on chrome
+        .node-label {
+            display: flex;
+            display: grid;
+            grid-template-columns: auto auto 1fr;
+            gap: 0.4rem;
+            align-items: center;
+            
+            .node-dash {
+                width: 0.7rem;
+                border-top: 1px solid $line-color-horizontal;
+            }
+
+            input.node-text {
+                font-size: $node-text-size;
+                font-weight: $node-text-weight;
+                font-family: 'Open Sans', sans-serif;
+                min-width: 50px;
+                margin-right: 80px; // for new-node onHover button allowance
+                padding: $node-text-padding;
+                border-radius: 2px;
+                color: $node-text-color;
+                background: $node-text-bg;
+                
+                &:focus-within {
+                    background: $node-text-bg-focus;
+                    color: $node-text-color;
+                }
+            }
+
+            svg.jam {
+                width: $toggle-check-size;
+                background: $toggle-check-bg;
+                border-radius: 50%;
+                fill: none;
+                
+                &:hover {
+                    background: $toggle-check-hover-bg;
+                    fill: $toggle-check-hover-fill;
+                }
+            }
+        }   
+    }
+
+    // Node Toggle
+    .node-view {
+        position: absolute;
+        height: 100%;
+        left: -1.25rem;
+        display: flex;
+        align-items: center;
+        pointer-events: none;
+        
+        svg.jam {
+            width: 0.75rem;
+            fill: #777;
+            pointer-events: visible;
+            
+            &:hover {
+                fill: #444;
+            }
+            
+            path {
+                pointer-events: none;
+            }
+        }
+        
+        &.is-collapsed svg.jam {
+            fill: #ccc;
+        }
+    }
+    
+    // New Node
+    .new-node {
+        height: $node-content-height;
+        display: flex;
         align-items: center;
 
-        .dashed-line-h {
-            border-top: 1px dashed #ccc;
-            width: 0.5rem;
-        }
-
-        .dashed-line-v {
-            border-left: 1px dashed #ccc;
-        }
-
-        svg.jam {
-            width: 20px;
-            fill: #ffd2d2;
-            fill: #ddd;
-            fill: #f6f6f6;
+        svg.jam,
+        svg.mdi,
+        svg.mdi path {
+            width: 1.1rem;
+            fill: #dad240;
+            
+            &:hover {
+                fill: #ece447;
+            }
         }
     }
 
-    .add-main-branch {
+    .add-main-node {
         position: absolute;
         align-items: center;
         bottom: 0;
         left: 0;
-        gap: 0.3rem;
+        gap: 0.4rem;
     }
     
-    .add-sibling-branch {
-        gap: 0;
-        margin-left: 3.4rem;
-        
-        .dashed-line-v {
-            top: -1rem;
-            position: relative;
-            left: 0;
-            height: 2rem;
-        }
-        
-        .add-child-angled {
-            display: flex;
-            align-items: center;
-            gap: 0.2rem;
-        }
-
-        &.has-descendant {
-            position: absolute;
-            margin-left: 0;
-        }
-    }
-   
-    .add-child-branch {
-        display: flex;
-        gap: 0.1rem;
+    .add-sibling-node {
+        gap: 0.3rem;
 
         .dashed-line-h {
-            width: 1rem;
-        }
-
-        svg.jam {
-            background: none;
-            width: 20px;
-            fill: #caeaff;
-            // fill: #e7e7e7;
-            // fill: #f6f6f6;
-        }
-    }
-    
-    .add-last-branch {
-
-        .dashed-line-v {
-            top: -1rem;
-            position: relative;
-            left: 0;
-            height: 32px;
-        }
-
-        .add-child-angled {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;  
+            border-top: 1px solid $line-color-horizontal;
+            width: 0.7rem;
         }
 
         &:before {
             content: '';
             position: absolute;
-            background: white;
-            height: 1rem;
+            background: $excess-line-cover-color;
+            height: $excess-line-top;
             bottom: 0;
             width: 1px;
-        }   
+            z-index: 9;
+        }
+    }
+    
+    .add-new-node {
+        display: none;
+        margin-left: 0.5rem;
+        gap: 0.3rem;
+
+        svg.mdi {
+            cursor: pointer;
+            pointer-events: visible;
+            visibility: visible;
+            
+            &.mdi-add-sibling {
+                transform: rotate(90deg);
+            }
+
+            &.mdi-add-child {
+                transform: rotate(180deg);
+            }
+
+            path {
+                fill: #7e7e7e;
+                pointer-events: none;
+            }
+
+            &:hover {
+                path {
+                    fill: #47eccf;
+                }
+            }
+        }
+
+        .mdi-add-sibling:hover {
+            path {
+                fill: #47eccf;
+            }
+        }
+
+        .mdi-add-child:hover {
+            path {
+                fill: #eaeaea;
+            }
+        }
+
+        svg.jam,
+        svg.mdi {
+            fill: #7e7e7e;
+            
+            
+            &:hover {
+                fill: #ffc143;
+                fill: #ccff43;
+                // fill: #47eccf;
+            }            
+        }
     }
 }
 

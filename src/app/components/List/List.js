@@ -1,22 +1,29 @@
-import { s, sA } from '../../utils/base'
-import { setInputWidth, isCollapsed } from './ListEvents'
-
-export const DOM = {
-    nodeRoot:    '.list-tree-root',
-    nodeParent:  '.list-tree-root li',
-    nodeContent: '.node-content',
-    branchView:  '.js-branch-collapse',
-    viewSVG:     '.js-branch-collapse svg',
-    widthRefer:   '.calc-label-width span',
-}
+import { s, sA, DOM } from '../../utils/base'
+import * as Events from './ListEvents'
 
 export const StaticEvents = () => {
-    // check if needed on global event
-    s(DOM.nodeRoot).addEventListener('input', setInputWidth)
+    
+    // initialize ui state
+    document.addEventListener('DOMContentLoaded', function(e) {
+        Events.attachNodeViewBtn(null)
+        Events.resizeInputInit()
+        Events.attachNewNode(e, false, null)
+    })
 }
 
 export const DynamicEvents = () => {
-    sA(DOM.nodeContent).forEach(content => {
-        content.addEventListener('click', isCollapsed)
+
+    // resize input field
+    s(DOM.root).addEventListener('input', function(e) {
+        Events.resizeInput(e, false)
+    })
+
+    // toggle edit mode view
+    s(DOM.listHeader).addEventListener('click', Events.editMode)
+    
+    s(DOM.tree).addEventListener('click', function(e) {
+        Events.nodeView(e)
+        Events.createNode(e)
+        Events.deleteNode(e)
     })
 }

@@ -12,7 +12,7 @@
     .panel {
         @include debug(yellow);
         display: grid;
-        padding: 10px;
+        padding: 0.5rem;
         grid-template-columns: 480px;
         grid-auto-flow: column;
         grid-auto-columns: minmax(340px, 480px);
@@ -27,19 +27,18 @@
 
 .ws-header {
     background: $bg-workspace;
-    // height: 100%;
-    
     
     .ws-header-wrap {
-        max-height: 48px;
+        max-height: 2.5rem;
         z-index: 4;
-        padding: 6px;
+        padding: 6px 0.5rem;
         display: flex;
         align-items: center;
+        gap: 0.5rem;
     }
     
     svg {
-        width: 24px;
+        width: 1.5rem;
         fill: $ws-header-icons;
         cursor: pointer;
 
@@ -48,8 +47,8 @@
         }
     }
     
-    .ws-toggles svg:first-child {
-        margin-left: 12px;
+    .ws-toggles {
+        display: flex;
     }
 }
 
@@ -57,6 +56,7 @@
 
 .ws-dropdown {
     background: #56a0b4;
+    background: #525252;
     display: grid;
     grid-template-rows: auto 1fr;
     align-self: baseline;
@@ -93,7 +93,7 @@
         display: none;
         flex-direction: column;
         color: white;
-        padding: 0 0 3px;
+        padding: 0 0 0.2rem;
         border-radius: 0 0 3px 3px;
         
         li {
@@ -115,7 +115,6 @@
     }
     
     svg.jam {
-        // margin-left: 0px 3px 0px 6px;
         width: 18px;
         margin: 0 10px;
         fill: $ws-select-icon;
@@ -125,18 +124,18 @@
 }
 
 // Settings - Far Right
-
 .ws-settings {
     margin-left: auto;
+    display: flex;
     
     svg.jam-cog-f {
-        margin-right: 8px;
+        margin-right: 0.5rem;
     }
     
     .ws-set {
         display: grid;
         display: none;
-        grid-template-rows: 48px 1fr;
+        grid-template-rows: 2.5rem 1fr;
         width: 280px;
         height: calc(100% - 50px);
         position: fixed;
@@ -149,7 +148,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 48px;
+            height: 2.5rem;
             padding: 0 16px 0 20px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
             
