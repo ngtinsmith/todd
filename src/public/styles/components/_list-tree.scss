@@ -13,7 +13,7 @@ $input-bg-color-focus: #383838;
 
 /* Tree BG */
 $bg-color-light: #f9f9f9;
-$bg-color-dark: #2c2c2c;
+$bg-color-dark: #191a20;
 
 $bg-primary: $bg-color-dark;
 $tree-content-bg: $bg-color-dark;
@@ -32,26 +32,429 @@ $excess-line-cover-color: $bg-color-dark;
 /* Node Content */
 $text-bg-light: #f9f9f9;
 $text-color-light: #636363;
-$text-color-dark: #d7d7d7;
+$text-color-dark: #a1a1a1;
 
-$node-text-color: $text-color-dark;
 $node-text-bg: none;
-$node-text-bg-focus: $input-bg-color-focus;
-$node-text-color-focus: #fff;
-$node-text-weight: 400;
-$node-text-size: 0.8rem;
-$node-text-padding: 1px 5px;
+$node-text-color: $text-color-dark;
+$node-text-focus-bg: #252632;
+$node-text-focus-color: #e1e1e1;
+$node-text-selection-bg: #5462ff;
+$node-text-selection-color: #fff;
+$node-text-weight: 500;
+$node-text-size: 0.75rem;
+$node-text-padding: 2px 4px;
+$node-text-font-family: Raleway, sans-serif;
 
 /* Node Check Toggle */
-$toggle-check-size: 0.9rem;
-$toggle-check-bg: #4a4a4a;
-$toggle-check-hover-bg: #fca4a4;
-$toggle-check-hover-fill: #fff;
+$toggle-check-size: 0.8rem;
+$toggle-check-bg: #2f313c;
+$toggle-check-hover-bg: #565a72;
+$toggle-check-hover-fill: none;
+$toggle-check-on-bg: #ffe763;
+$toggle-check-on-fill: #000000;
+$toggle-check-on-hover-bg: #e4ce56;
+$toggle-check-on-hover-fill: #000000;
+$toggle-radius: 50%;
+$toggle-margin: 0 0.3rem 0 0.4rem;
+
 
 // Tree Container
 .list-tree {
     background: #000;
     position: relative;
+    border-radius: 3px;
+}
+
+// Tree Content
+.list-tree-content {
+    border: 1px solid purple;
+    padding: 10px;
+    border-radius: 3px;
+    background: $tree-content-bg;
+    border: none;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    
+    @at-root ul.list-tree-root { 
+        display: grid;
+        margin-bottom: 10px;
+
+        &.edit-mode {
+
+            .node-content {
+            
+                &:hover {
+                    background: #1f2027;
+                    background: #17171b;
+                    background: #1e2029;
+                    border-radius: 0px 3px 3px 0px;
+
+                    .add-new-node {
+                        display: flex;
+                        position: absolute;
+                        right: 5px;
+                    }
+                }
+
+                &.is-muted:hover {
+                    background: none;
+
+                    .add-new-node {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        &.is-muted {
+            pointer-events: none;
+            
+            &:hover {
+                pointer-events: none;
+
+            }
+        }
+    }
+
+    // Descendants
+    ul {
+        position: relative;
+        margin-left: 2.4rem;
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            border-left: 1px solid $line-color-vertical;
+            z-index: 1;
+        }
+
+        &.list-tree-root {
+            margin-left: 1.2rem;
+        }
+    }
+
+    li {
+        position: relative;
+
+        &.is-collapsed {
+
+            .node-label:after {
+                display: block;    
+            }
+
+            ul, .add-main-branch {
+                display: none;
+            }
+            
+            .add-sibling-branch,
+            .add-test-branch {
+                position: relative;
+
+                &:not(.has-descendant) {
+                    display: none;
+                }
+            }
+        }
+
+        &:last-child:before {
+            content: '';
+            background: $excess-line-cover-color;
+            position: absolute;
+            height: auto;
+            top: $excess-line-top;
+            bottom: 0;
+            width: 1px;
+            z-index: 2;
+        }
+    }
+
+
+    // Primary Node Highlight
+    .list-tree-root > li > .node-content > .node-label > .node-text {
+        color: #ffba51;
+        font-weight: 600;
+        
+        &:focus {
+            color: #ffcb7e;
+        }
+        &:focus-within {
+            background: #2a2c38;
+            color: #ffaf36;
+        }
+    }
+    
+    // Secondary / Has-child node highlight
+    ul li .is-collapsed,
+    ul li .is-expanded {
+        > .node-content > .node-label > .node-text {
+            color: #e1ebff;
+            font-weight: 600;
+            
+            &:focus-within {
+                background: #262832;
+                color: #f1f6ff;
+            }
+        }
+    }
+
+    .calc-label-width {
+        position: relative;
+        
+        /*  font-size and font-weight handled in JS
+            uncomment "position, z-index, and opacity" for testing
+        */
+        span {
+            position: absolute;
+            z-index: -1;
+            // position: relative;
+            // z-index: 999;
+            // opacity: 0;
+            color: #fff;
+            background: #444;
+            padding: $node-text-padding;
+            white-space: pre;
+        }
+    }
+
+
+    // Node Label
+    .node-content {
+        height: $node-content-height;
+        position: relative;
+        display: flex;
+        z-index: 0;
+        margin-right: 10px;
+
+        svg.jam,
+        svg.mdi,
+        svg.mdi path {
+            transition: 0.1s ease-in-out;
+        }
+        
+        .node-label {
+            display: grid;
+            grid-template-columns: auto auto auto 1fr;
+            align-items: center;
+            position: relative;
+
+            &:after {
+                display: none;
+                content: '';
+                border-top: 2px dotted #ffffff4d;
+                color: #ffffff4d;
+                position: relative;
+                right: 75px;
+                width: 0.5rem;
+            }
+
+            > :last-child {
+                margin-right: 80px; // for new-node onHover button allowance
+            }
+            
+            .node-dash {
+                width: 0.7rem;
+                border-top: 1px solid $line-color-horizontal;
+            }
+
+            input.node-text {
+                font-size: $node-text-size;
+                font-weight: $node-text-weight;
+                font-family: $node-text-font-family;
+                min-width: 1rem;
+                padding: $node-text-padding;
+                border-radius: 2px;
+                color: $node-text-color;
+                background: $node-text-bg;
+                position: relative;
+                
+                &:focus {
+                    background: $node-text-focus-bg;
+                    color: $node-text-focus-color;
+                }
+
+                &::selection {
+                    background: $node-text-selection-bg;
+                    color: $node-text-selection-color;
+                }
+            }
+            
+            svg.jam {
+                margin: $toggle-margin;
+                width: $toggle-check-size;
+                height: $toggle-check-size;
+                background: $toggle-check-bg;
+                border-radius: $toggle-radius;
+                fill: none;
+                
+                &:hover {
+                    background: $toggle-check-hover-bg;
+                    fill: $toggle-check-hover-fill;
+                }
+            }
+        }
+        
+        .node-tag {
+            color: #fff;
+            font-weight: 500;
+            font-size: 0.7rem;
+            background: #003a6b;
+            padding: 1px 4px;
+            border-radius: 2px; 
+        }   
+    }    
+
+    // Check Toggle
+    .node-content[data-is-checked="true"] {
+        svg.jam-check {
+            background: $toggle-check-on-bg;
+            fill: $toggle-check-on-fill;
+
+            &:hover {
+                background: $toggle-check-on-hover-bg;
+                fill: $toggle-check-on-hover-fill;
+            }
+        }
+    }
+
+    // Node Toggle
+    .node-view {
+        position: absolute;
+        height: 100%;
+        left: -1.3rem;
+        display: flex;
+        align-items: center;
+        pointer-events: none;
+        
+        svg.jam {
+            width: 0.75rem;
+            fill: #777;
+            pointer-events: visible;
+            
+            &:hover {
+                fill: #a5a5a5;
+            }
+
+            &:active {
+                fill: #c9c9c9;
+            }
+            
+            path {
+                pointer-events: none;
+            }
+        }
+        
+        &.is-collapsed svg.jam {
+            fill: #ccc;
+        }
+    }
+    
+    // New Node
+    .new-node {
+        height: $node-content-height;
+        display: flex;
+        align-items: center;
+
+        svg.jam,
+        svg.mdi {
+            width: 1rem;
+            fill: #d7d7d7;
+            
+            &:hover {
+                fill: #ebebeb;
+            }
+            
+            &:active {
+                fill: #ffffff;
+            }
+        }
+
+        &.add-sibling-node {
+            gap: 0.3rem;
+    
+            svg.mdi {
+                width: 1rem;
+                fill: #c9c9c9;
+                
+                &:hover {
+                    fill: #4cff48;
+                }
+            }
+    
+            .dashed-line-h {
+                border-top: 1px solid $line-color-horizontal;
+                width: 0.7rem;
+            }
+    
+            &:before {
+                content: '';
+                position: absolute;
+                background: $excess-line-cover-color;
+                height: $excess-line-top;
+                bottom: 0;
+                width: 1px;
+                z-index: 9;
+            }
+        }
+    }
+    
+
+    
+    .add-new-node {
+        display: none;
+        margin-left: 0.5rem;
+        gap: 0.3rem;
+
+        svg.mdi {
+            cursor: pointer;
+            pointer-events: visible;
+            visibility: visible;
+            
+            path {
+                fill: #67686e;
+                pointer-events: none;
+            }
+
+            &.mdi-delete {
+                width: 1.1rem;
+
+                &:hover {
+                    path {
+                        fill: #ff4b4b;
+                    }
+                }
+            }
+
+            $node-edit-btn-hover-fill: #4cff48;
+            $node-edit-btn-add-width: 1.1rem;
+            
+            &.mdi-add-sibling {
+                width: $node-edit-btn-add-width;
+                
+                &:hover {
+                    path {
+                        fill: $node-edit-btn-hover-fill;
+                    }
+                }
+            }
+            
+            &.mdi-add-child {
+                transform: rotate(180deg);
+                width: $node-edit-btn-add-width;
+
+                &:hover {
+                    path {
+                        fill: $node-edit-btn-hover-fill;
+                    }
+                }
+            }
+        }
+    }
 }
 
 // Modal
@@ -145,332 +548,3 @@ $toggle-check-hover-fill: #fff;
         }
     }
 }
-
-.list-tree-content {
-    border: 1px solid purple;
-    padding: 10px;
-    border-radius: 3px;
-    background: $tree-content-bg;
-    border: none;
-    height: 100%;
-    overflow-y: auto;
-    position: relative;
-    
-    @at-root ul.list-tree-root { 
-        display: grid;
-        margin-bottom: 10px;
-
-        &.edit-mode {
-
-            .node-content {
-            
-                &:hover {
-                    background: #353535;
-                    border-radius: 0px 3px 3px 0px;
-
-                    .add-new-node {
-                        display: flex;
-                        position: absolute;
-                        right: 5px;
-                    }
-                }
-                
-
-                &.is-muted:hover {
-                    background: none;
-
-                    .add-new-node {
-                        display: none;
-                    }
-                }
-            }
-        }
-
-        &.is-muted {
-            pointer-events: none;
-            
-            &:hover {
-                pointer-events: none;
-
-            }
-        }
-    }
-
-    svg.jam {
-        cursor: pointer;
-
-        path {
-            pointer-events: none;
-        }
-    }
-
-    // Descendants
-    ul {
-        position: relative;
-        margin-left: 2.4rem;
-
-        &:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            border-left: 1px solid $line-color-vertical;
-            z-index: 1;
-        }
-
-        &.list-tree-root {
-            margin-left: 1.2rem;
-        }
-    }
-
-    li {
-        position: relative;
-
-        &.is-collapsed {
-
-            ul, .add-main-branch {
-                display: none;
-            }
-            
-            .add-sibling-branch,
-            .add-test-branch {
-                position: relative;
-
-                &:not(.has-descendant) {
-                    display: none;
-                }
-            }
-        }
-
-        &:last-child:before {
-            content: '';
-            background: $excess-line-cover-color;
-            position: absolute;
-            height: auto;
-            top: $excess-line-top;
-            bottom: 0;
-            width: 1px;
-            z-index: 2;
-        }
-    }
-
-    .calc-label-width {
-        position: relative;
-        
-        /*  font-size and font-weight handled in JS
-            uncomment "position, z-index, and opacity" for testing
-        */
-        span {
-            position: absolute;
-            z-index: -1;
-            // position: relative;
-            // z-index: 999;
-            // opacity: 0;
-            color: #fff;
-            background: #444;
-            padding: $node-text-padding;
-            white-space: pre;
-        }
-    }
-
-    // Primary Node Highlight
-    .list-tree-root > li > .node-content > .node-label > .node-text {
-        background: #414768;
-        background: #9f0a7e;
-        background: #f5f5f5;
-        color: #f5f5f5;
-        color: #353535;
-        font-weight: 600;
-        
-        &:focus {
-            background: #394068;
-            background: #8a066d;
-            background: #f8f8f8;
-            color: #fff;
-            color: #1b1b1b;
-        }
-    }
-
-    // Node Label
-    .node-content {
-        height: $node-content-height;
-        position: relative;
-        display: flex;
-        z-index: 0;
-        margin-right: 10px;
-        
-        // temporary grid due to lack of 'gap' support on chrome
-        .node-label {
-            display: flex;
-            display: grid;
-            grid-template-columns: auto auto 1fr;
-            gap: 0.4rem;
-            align-items: center;
-            
-            .node-dash {
-                width: 0.7rem;
-                border-top: 1px solid $line-color-horizontal;
-            }
-
-            input.node-text {
-                font-size: $node-text-size;
-                font-weight: $node-text-weight;
-                font-family: 'Open Sans', sans-serif;
-                min-width: 50px;
-                margin-right: 80px; // for new-node onHover button allowance
-                padding: $node-text-padding;
-                border-radius: 2px;
-                color: $node-text-color;
-                background: $node-text-bg;
-                
-                &:focus-within {
-                    background: $node-text-bg-focus;
-                    color: $node-text-color;
-                }
-            }
-
-            svg.jam {
-                width: $toggle-check-size;
-                background: $toggle-check-bg;
-                border-radius: 50%;
-                fill: none;
-                
-                &:hover {
-                    background: $toggle-check-hover-bg;
-                    fill: $toggle-check-hover-fill;
-                }
-            }
-        }   
-    }
-
-    // Node Toggle
-    .node-view {
-        position: absolute;
-        height: 100%;
-        left: -1.25rem;
-        display: flex;
-        align-items: center;
-        pointer-events: none;
-        
-        svg.jam {
-            width: 0.75rem;
-            fill: #777;
-            pointer-events: visible;
-            
-            &:hover {
-                fill: #444;
-            }
-            
-            path {
-                pointer-events: none;
-            }
-        }
-        
-        &.is-collapsed svg.jam {
-            fill: #ccc;
-        }
-    }
-    
-    // New Node
-    .new-node {
-        height: $node-content-height;
-        display: flex;
-        align-items: center;
-
-        svg.jam,
-        svg.mdi,
-        svg.mdi path {
-            width: 1.1rem;
-            fill: #dad240;
-            
-            &:hover {
-                fill: #ece447;
-            }
-        }
-    }
-
-    .add-main-node {
-        position: absolute;
-        align-items: center;
-        bottom: 0;
-        left: 0;
-        gap: 0.4rem;
-    }
-    
-    .add-sibling-node {
-        gap: 0.3rem;
-
-        .dashed-line-h {
-            border-top: 1px solid $line-color-horizontal;
-            width: 0.7rem;
-        }
-
-        &:before {
-            content: '';
-            position: absolute;
-            background: $excess-line-cover-color;
-            height: $excess-line-top;
-            bottom: 0;
-            width: 1px;
-            z-index: 9;
-        }
-    }
-    
-    .add-new-node {
-        display: none;
-        margin-left: 0.5rem;
-        gap: 0.3rem;
-
-        svg.mdi {
-            cursor: pointer;
-            pointer-events: visible;
-            visibility: visible;
-            
-            &.mdi-add-sibling {
-                transform: rotate(90deg);
-            }
-
-            &.mdi-add-child {
-                transform: rotate(180deg);
-            }
-
-            path {
-                fill: #7e7e7e;
-                pointer-events: none;
-            }
-
-            &:hover {
-                path {
-                    fill: #47eccf;
-                }
-            }
-        }
-
-        .mdi-add-sibling:hover {
-            path {
-                fill: #47eccf;
-            }
-        }
-
-        .mdi-add-child:hover {
-            path {
-                fill: #eaeaea;
-            }
-        }
-
-        svg.jam,
-        svg.mdi {
-            fill: #7e7e7e;
-            
-            
-            &:hover {
-                fill: #ffc143;
-                fill: #ccff43;
-                // fill: #47eccf;
-            }            
-        }
-    }
-}
-

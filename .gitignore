@@ -2,6 +2,9 @@
 
 /dist
 /.vscode
+nodemon.json
+.env
+/docs
 
 # npm packages
 /node_modules

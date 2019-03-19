@@ -1,24 +1,19 @@
-// Workspace
-
 .workspace {
     @include debug(purple);
     background: #c3c3c3;
     background: #646c72;
+    background: #86878f;
     font-size: 1rem;
     display: grid;
     grid-template-rows: auto 1fr;
     overflow: hidden;
-    
+
     .panel {
         @include debug(yellow);
-        display: grid;
+        display: flex;
         padding: 0.5rem;
-        grid-template-columns: 480px;
-        grid-auto-flow: column;
-        grid-auto-columns: minmax(340px, 480px);
         gap: 10px;
-        overflow: hidden;
-        overflow-x: auto;
+        overflow-y: auto;
         box-shadow: inset 0px 0px 2px rgba( black, 0.5);
     }
 }
@@ -49,14 +44,72 @@
     
     .ws-toggles {
         display: flex;
+        align-items: center;
+
+        // New Workspace
+        .new-workspace {
+            background: #ededed;
+            color: #878686;
+            padding: 0 5px 0 5px;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+            height: 30px;
+            cursor: pointer;
+
+            &:hover {
+                background: #e4e4e4;
+                color: #757575;
+            }
+            
+            &:active {
+                background: #dbdbdb;
+            }
+
+            svg.jam {
+                fill: #b9b9b9;
+                
+                &:hover {
+                    fill: #9b9b9b;
+                }
+            }
+        }
+
+        
+        
+        .ws-sync {
+            margin-left: 0.5rem;
+            
+
+            button.ws-sync-all {
+                font-size: 0.8rem;
+                font-weight: 600;
+                border: 0;
+                padding: 0.25rem 0.5rem;
+                border-radius: 2px;
+                cursor: pointer;
+                outline: none;
+                
+                background: #32ae4a;
+                color: #fff;
+
+                &:hover {
+                    background: #279e3e;
+                }
+                
+                &:active {
+                    background: #19802d;
+                }
+            }
+        }
     }
 }
 
 // Workspace Dropdown
-
 .ws-dropdown {
-    background: #56a0b4;
-    background: #525252;
+    background: #5e616e;
     display: grid;
     grid-template-rows: auto 1fr;
     align-self: baseline;
@@ -64,8 +117,22 @@
     font-size: 0.9rem;
     line-height: 0;
     overflow: hidden;
-    z-index: 999;
+    z-index: 1;
     cursor: pointer;
+    user-select: none;
+
+    &.is-open {
+        .ws-choices {
+            display: block;
+        }
+    }
+
+    svg.jam {
+        width: 18px;
+        margin: 0 10px;
+        fill: $ws-select-icon;
+        pointer-events: none;
+    }  
 
     .ws-select {
         display: flex;
@@ -81,14 +148,15 @@
 
         .select-text {
             margin-left: 10px;
+            pointer-events: none;
+            user-select: none;
         }
 
         &:hover {
-            background: #4c8ea0;
+            background: #525561;
         }
     }
 
-    
     .ws-choices {
         display: none;
         flex-direction: column;
@@ -97,7 +165,6 @@
         border-radius: 0 0 3px 3px;
         
         li {
-            // @include debug-min(yellow);
             display: flex;
             align-items: center;
             padding-left: 10px;
@@ -105,44 +172,46 @@
             min-height: 28px;
             
             &:hover {
-                background: #4c8ea0;
+                background: #525561;
             }
         }
-    }
-
-    &.is-expanded {
-        border-radius: 3px 3px 0px 0px;
-    }
-    
-    svg.jam {
-        width: 18px;
-        margin: 0 10px;
-        fill: $ws-select-icon;
-    }
-    
-    
+    } 
 }
+
 
 // Settings - Far Right
 .ws-settings {
     margin-left: auto;
     display: flex;
     
-    svg.jam-cog-f {
-        margin-right: 0.5rem;
+    &.is-open {
+        .ws-settings-panel {
+            display: grid;
+        }
+    }
+
+    svg.jam-cog-f,
+    svg.mdi-ws-settings {
+        margin-right: 0.3rem;
+        width: 1.4rem;
+        fill: #999;
+        
+        &:hover {
+            fill: #777;
+        }
     }
     
-    .ws-set {
-        display: grid;
+    .ws-settings-panel {
         display: none;
         grid-template-rows: 2.5rem 1fr;
         width: 280px;
         height: calc(100% - 50px);
         position: fixed;
-        top: 50px;
+        top: 2.5rem;
         right: 0px;
         background:$bg-ws-settings;
         color: $bg-ws-settings-text;
+        z-index: 2;
         
         .ws-set-heading {
             display: flex;
@@ -158,7 +227,9 @@
             }
             
             svg.jam-close {
-                width: 28px;
+                width: 1.5rem;
+                position: relative;
+                right: -0.3rem;
             }
         }
 

@@ -1,12 +1,12 @@
 process.traceDeprecation = true;
 
 const path = require('path')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const webpack = require('webpack')
 const HtmlWebpackInlineSVGPlugin = require('html-webpack-inline-svg-plugin')
-// const url = 'node_modules/jam-icons/svg/'
+const nodeExternals = require('webpack-node-externals')
 
 module.exports = {
     entry: './src/index.js',
@@ -19,13 +19,25 @@ module.exports = {
         compress: true,
         port: 4000,
     },
-    /* Devtool SourceMaps
-     * 
+    resolve: {
+        alias: {
+            mod: path.resolve(__dirname, 'node_modules/'),
+        }
+    },
+    // target: 'node',
+    // node: {
+    //     __dirname: false,
+    //     __filename: false
+    // },
+    // externals: [nodeExternals()], // Need this to avoid error when working with Express
+    
+    /** 
+     * Devtool SourceMaps
      * dev  - eval-source-map
      *        cheap-module-eval-source-map 
      * prod - source-map
      *        inline-source-map
-     **/
+     */
     devtool: "source-map",
     module: {
         rules: [
@@ -92,13 +104,14 @@ module.exports = {
             {
                 test: /\.svg$/,
                 use: [
+                    
                     {
                         loader: 'file-loader',
                         options: {
                             name: '[path][name].[ext]',
                             emitFile: false
                         }
-                    } 
+                    },
                 ]
             },
 
@@ -132,17 +145,18 @@ module.exports = {
         new CleanWebpackPlugin('dist', {}),
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: 'src/public/index.html'
-        }),
-        new HtmlWebpackInlineSVGPlugin({
-            /* runPreEmit: true so it'll run "before" the html
-             * template is parsed by html-webpack-plugin
-             **/
-            runPreEmit: true,
+            template: 'src/public/index.html',
             svgoConfig: {
                 removeTitle: false,
                 removeViewBox: true,
-            },
+            }
+        }),
+        new HtmlWebpackInlineSVGPlugin({
+            /** 
+             * runPreEmit: true so it'll run "before" the html
+             * template is parsed by html-webpack-plugin
+             */
+            runPreEmit: true,
         }),
         new MiniCssExtractPlugin({
             filename: 'static/styles/[name].[contenthash].css',

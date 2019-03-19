@@ -1,13 +1,11 @@
 import './public/styles'
-import { _init } from './app/_init'
+import * as app from './app/app'
+import * as serverAPI from '../server/api/services'
+import * as clientAPI from './app/config/api/services'
 
-/* Main Entry Point
-    
-    Styles
-    Bootstrap
-    App.js(?)
-*/
+// init UI
+app.init()
 
-_init()
-
-console.log(`App running...`)
+// init Services
+serverAPI.init()
+clientAPI.init()

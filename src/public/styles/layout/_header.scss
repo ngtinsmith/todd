@@ -4,16 +4,19 @@
     background: #494c5c;
     position: relative;
     z-index: 5;
+    padding: 0.25rem 0.5rem;
 }
 
 // Header Item Wrapper
 .header-items { 
     display: flex;
     flex: 1;
+    align-items: center;
+    // border: 1px solid cyan;
 
     &:nth-child(2) {
         justify-content: center;
-        max-width: 80px;
+        max-width: 100px;
     }
 
     &:nth-child(3) {
@@ -25,9 +28,12 @@
 .header-menu {
     display: flex;
     align-items: center;
+    // background: orange;
+    gap: 0.25rem;
 
-    svg.jam-menu {
-        width: 50px;
+    svg.mdi {
+        width: 1.5rem;
+        margin-left: 0.3rem;
         fill: $header-icon;
         cursor: pointer;
         
@@ -35,29 +41,10 @@
             fill: $header-icon-active;
         }
     }
-}
 
-// Header Search Bar
-.menu-search {
-    background: $bg-search;
-    padding: 4px 8px;
-    border-radius: 3px;
-    display: flex;
-    align-items: center;
-    
-    &:hover {
-        background: $bg-search-active;
-    }
-
-    input {
-        background: none;
-        font-size: 12px;
-    }
-
-    svg.jam-search {
-        width: 18px;
-        fill: #494c5c;
-        cursor: pointer;
+    .menu-label {
+        color: #fff;
+        font-size: 0.8rem;
     }
 }
 
@@ -69,11 +56,16 @@
 
 .header-logo a {
     text-decoration: none;
-    border: 2px solid rgba($color: #ffffff, $alpha: 0.5);
-    color: rgba($color: #ffffff, $alpha: 0.9);
-    padding: 2px 6px;
-    font-size: 18px;
-    border-radius: 4px;
+    // border: 1px solid rgba($color: #ffffff, $alpha: 0.5);
+    color: rgba($color: #ffffff, $alpha: 1);
+    padding: 2px 6px 3px 8px;
+    font-size: 0.9rem;
+    border-radius: 2px;
+    user-select: none;
+    outline: none;
+    letter-spacing: 2px;
+    font-weight: 600;
+    background: #e43346;
     
     &:hover {
         border: 2px solid rgba($color: #ffffff, $alpha: 0.6);
@@ -85,11 +77,18 @@
 .header-user {
     display: flex;
     align-items: center;
-    padding-right: 0.3rem;
+    // padding-right: 0.3rem;
     position: relative;
 
+    &.is-open {
+        .user-options {
+            display: block;
+        }
+    }
+
     svg {
-        width: 24px;
+        width: 2rem;
+        // margin-left: 0.25rem;
         fill: $header-icon;
         
         &:hover {
@@ -98,65 +97,43 @@
         
     }
     
-    .jam-user-circle {
+    svg.jam-user-circle {
         margin: 0 5px 0 10px;
         width: 36px;
         cursor: pointer;
     }
 
-    .user-add-ws {
-        background: $btn-user-add;
-        padding: 0 10px 0 5px;
-        border-radius: 3px;
-        display: flex;
-        align-items: center;
-        font-size: 14px;
-        font-weight: 600;
-        color: $btn-user-add-color;
-        height: 30px;
-        cursor: pointer;
-
-        &:hover {
-            background: rgba($color: #ffffff, $alpha: 0.2);
-            color: $color-white;
-        }
-
-        span {
-            margin-left: 2px;
-        }
-    }
+    
 }
 
 // User Toggle
 .user-options {
     display: none;
     position: absolute;
-    top: 3rem;
-    right: 10px;
-    z-index: 1;
+    top: 2.1rem;
+    right: -0.1rem;
     
     &::after {
         content: " ";
-        background: #e9e9e9;
-        background: #fcfcfc;
+        background: #fcfcfc;    
         position: absolute;
-        top: -2px;
-        right: 0.9rem;
-        width: 0.5rem;
-        height: 0.5rem;
+        top: 0;
+        right: 0.65rem;
+        width: 1rem;
+        height: 1rem;
         transform: rotate(135deg);
+        z-index: -1;
     }
     
     .user-opt-wrap {
+        z-index: 15;
         position: relative;
         top: 4px;
         width: 240px;
         background: #e9e9e9;
         background: #fcfcfc;
         border-radius: 5px;
-        box-shadow: 0px 4px 2px -1px rgba(0, 0, 0, 0.3);
-        box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.3);
-        
+        box-shadow: 0px 3px 2px 0px rgba(0, 0, 0, 0.3);
     }   
 }
 
