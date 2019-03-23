@@ -1,5 +1,3 @@
-import svgCircle from 'jam-icons/svg/circle-f.svg'
-import svgPinF from 'jam-icons/svg/pin-f.svg'
 import svgArrowLeft from 'jam-icons/svg/arrow-left.svg'
 import svgArrowRight from 'jam-icons/svg/arrow-right.svg'
 import svgEllipsis from 'jam-icons/svg/more-horizontal-f.svg'
@@ -96,15 +94,19 @@ export const htmlList = (key, title, order) => {
         listContainer: `
             <div class="list-content js-list-content" data-key="${key}" data-order="${order}" data-observe="false" >
                 <div class="list-header js-list-header">
+
                     <div class="ls-header-primary">
-                        ${svgCircle}
+                        <div class="edit-wrapper js-edit-wrap">
+                            <div class="edit js-edit">
+                                <div class="edit-toggle js-edit-toggle">
+                                    <div class="edit-tgl-circle"></div>
+                                </div>
+                            </div>
+                        </div>
                         <input class="list-title" type="text" value="${title}" placeholder="Node Title...">
                     </div>
 
                     <div class="ls-header-secondary">
-                        <div class="toolbar-btn">
-                            ${svgPinF}
-                        </div>
                         <div class="toolbar-btn">
                             ${svgArrowLeft}
                             </div>
@@ -112,15 +114,18 @@ export const htmlList = (key, title, order) => {
                             ${svgArrowRight}
                         </div>
                         <div class="toolbar-btn no-hover">
-                            <div class="edit-wrapper js-edit-wrap">
-                                <div class="edit js-edit">
-                                        <div class="edit-label">Edit</div>
-                                        <div class="edit-toggle js-edit-toggle">
-                                            <div class="edit-tgl-circle"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <button class="save-list js-save-list">Save 
+                                <svg class="mdi mdi-spin"
+                                    version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    x="0px" y="0px"
+                                    viewBox="0 0 50 50"
+                                    xml:space="preserve">
+                                    <path d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z"></path>
+                                </svg>
+                            </button>
+                        </div>
                         <div class="toolbar-btn">
                             ${svgEllipsis}
                         </div>
@@ -152,36 +157,31 @@ export const htmlList = (key, title, order) => {
                             </div>
                         </div>
                     </div>
+                    <div class="modal-discard js-modal-discard">
+                        <div class="modal-heading">
+                            <h3 class="mdl-heading-text">Discard Changes</h3>
+                        </div>
+                        <div class="modal-content">
+                            <div class="modal-description">
+                                <p>Are you sure? All changes will not be saved.</p>
+                            </div>
+                            <div class="modal-buttons">
+                                <button class="modal-btn mdl-cancel">Cancel</button>
+                                <button class="modal-btn mdl-discard">Discard</button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="list-tree-content">
                         
                     </div>
-                </div>
-
-                <div class="list-footer js-list-footer">
-                    <div class="ls-footer-content js-ftr-content">
-                        <div class="list-status js-list-status">
-                            <p class="ls-stat-label">Unsaved changes...</p>
-                        </div>
-                        <svg class="mdi mdi-spin"
-                            version="1.1"
-                            xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink"
-                            x="0px" y="0px"
-                            viewBox="0 0 50 50"
-                            xml:space="preserve">
-                            <path fill="#000" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z"></path>
-                        </svg>
-                        <button class="ls-ftr-btn ftr-btn-save">Save</button> 
-                        <button class="ls-ftr-btn ftr-btn-discard">Discard</button> 
-                    </div>
-                </div>
                 
+                </div>        
             </div>     
         `,
 
         parent: `
             <ul class="list-tree-root js-tree-root">
-                <div class="calc-label-width"><span></span></div>
+                <div class="calc-label-width"><span class="hidden-span-ref"></span></div>
             </ul>
         `,
     }
@@ -196,7 +196,7 @@ export const nodeContent = (nodeKey, nodeVal, nodeIsChecked) => {
             <div class="node-label">
                 <span class="node-dash"></span>
                     ${svgCheck}
-                <input class="node-text" type="text" value="${nodeVal}">
+                <input class="node-text" type="text" value="${nodeVal}" placeholder="Enter new item...">
             </div>
         
         </div>

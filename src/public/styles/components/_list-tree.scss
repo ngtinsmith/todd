@@ -266,7 +266,7 @@ $toggle-margin: 0 0.3rem 0 0.4rem;
                 font-size: $node-text-size;
                 font-weight: $node-text-weight;
                 font-family: $node-text-font-family;
-                min-width: 1rem;
+                min-width: 96px;
                 padding: $node-text-padding;
                 border-radius: 2px;
                 color: $node-text-color;
@@ -474,19 +474,24 @@ $toggle-margin: 0 0.3rem 0 0.4rem;
     }
     
     .modal-content {
-        background: #efefef;
-        border-radius: 5px;
+        background: #f9f9f9;
+        border-radius: 3px;
         display: grid;
         gap: 15px;
-        padding: 10px 10px 15px 10px;
+        padding: 20px 15px 15px 15px;
         margin-bottom: 48px;
         color: #444;
         text-align: center;
         box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.4);
 
+        .modal-heading {
+            color: #444;
+        }
+
         .modal-description {
             font-size: 0.8rem;
             white-space: nowrap;
+            color: #777;
 
             p:first-child {
                 margin-bottom: 5px;
@@ -498,7 +503,7 @@ $toggle-margin: 0 0.3rem 0 0.4rem;
             }
         }
 
-        @at-root .modal-buttons {
+        .modal-buttons {
             margin-top: 5px;
             display: flex;
             justify-content: center;
@@ -517,7 +522,7 @@ $toggle-margin: 0 0.3rem 0 0.4rem;
                 }
                 
                 &.modal-cancel {
-                    background: #efefef;
+                    background: none;
                     border: 1px solid #888;
                     color: #666;
                     
@@ -534,7 +539,95 @@ $toggle-margin: 0 0.3rem 0 0.4rem;
                 
                 &.modal-delete {
                     background: #ff6969;
-                    color: #efefef;
+                    color: #fff;
+                    
+                    &:hover {
+                        background: #fc5050;
+                    }
+                    
+                    &:active {
+                        background: #fe3e3e;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.modal-discard {
+    display: none;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%,-45%);
+    opacity: 1;
+    z-index: 9999999;
+    user-select: none;
+    pointer-events: visible;
+    min-width: 300px;
+
+    background: #f9f9f9;
+    border-radius: 3px;
+    box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.4);
+
+    &.is-open {
+        display: block;
+    }
+
+    .modal-heading {
+        color: #444;
+        padding: 10px 15px;
+        border-bottom: 1px solid #e9e9e9;
+        font-size: 0.9rem;
+    }
+
+    .modal-content {
+        padding: 15px;
+
+        .modal-description {
+            font-size: 0.8rem;
+            color: #777;
+            margin: 5px 0 25px 0;
+        }
+
+        .modal-buttons {
+            margin-top: 5px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+
+            .modal-btn {
+                border: 0;
+                padding: 5px 10px;
+                border-radius: 3px;
+                font-weight: 600;
+                font-size: 0.8rem;
+                cursor: pointer;
+
+                &:active, &:focus {
+                    outline: none;
+                }
+                
+                &.mdl-cancel {
+                    background: none;
+                    border: 1px solid #9e9e9e;
+                    color: #666;
+                    
+                    &:hover {
+                        color: #545454;
+                        color: #3f3e3e;
+                        border: 1px solid #777;
+                    }
+                    
+                    &:active {
+                        color: #1d1d1d;
+                    }
+                }
+                
+                &.mdl-discard {
+                    background: #ff6969;
+                    color: #fff;
                     
                     &:hover {
                         background: #fc5050;

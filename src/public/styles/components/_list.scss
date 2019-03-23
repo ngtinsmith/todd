@@ -84,7 +84,6 @@
                 cursor: pointer;
                 max-width: 8rem;
                 color: #666;
-                // background: #efefef;
                 background: none;
                 border-radius: 3px;
                 font-size: 0.95rem;
@@ -99,10 +98,6 @@
                     background: #e2e2e2;
                 }
             }
-        }
-        
-        .ls-header-secondary {
-            gap: 0.5rem;
 
             .edit-wrapper {
                 display: flex;
@@ -162,7 +157,60 @@
     
                 }
             }
-            
+        }
+        
+        .ls-header-secondary {
+            gap: 0.5rem;
+
+            .save-list {
+                font-size: 0.8rem;
+                font-weight: 600;
+                border: 0;
+                padding: 0.2rem 0.5rem;
+                height: 1.5rem;
+                border-radius: 2px;
+                cursor: pointer;
+                outline: none;
+                transition: 0.05s ease-in-out; // needs width to work
+                background: #32ae4a;
+                color: #fff;
+                display: flex;
+                align-items: center;
+
+                &:hover {
+                    background: #279e3e;
+                }
+                
+                &:active {
+                    background: #1f9035;
+                }
+
+                &.saving {
+                    svg.mdi-spin {
+                        display: block;
+                    }
+                }
+
+                svg.mdi-spin  {
+                    display: none;
+                    fill: #7acf8a;
+                    width: 1.1rem;
+                    margin-left: 0.3rem;
+                    animation-name: spin;
+                    animation-duration: 1000ms;
+                    animation-iteration-count: infinite;
+                    animation-timing-function: linear;
+                }
+                
+                @keyframes spin {
+                    from {
+                        transform:rotate(0deg);
+                    }
+                    to {
+                        transform:rotate(360deg);
+                    }
+                }
+            }
         }
     }
 
@@ -173,98 +221,11 @@
             display: block;
         }
 
-        &.saving {
-            .ls-footer-content {
-
-                svg.mdi-spin {
-                    display: block;
-                }
-            }
-        }
 
         .ls-footer-content {
             display: flex;
             justify-content: flex-end;
             align-items: center;
-
-            .list-status {
-                display: none;
-                justify-self: flex-start;
-                margin-right: auto;
-
-                &.has-changes {
-                    display: block;
-                }
-                
-                p.ls-stat-label {
-                    font-size: 0.75rem;
-                    font-weight: 600;
-                    color: #aaaaaa;
-                }
-            }
-
-            svg.mdi-spin  {
-                display: none;
-                width: 1.5rem;
-                animation-name: spin;
-                animation-duration: 600ms;
-                animation-iteration-count: infinite;
-                animation-timing-function: linear;
-            
-                path {
-                    fill: #a5ddb0;
-                }
-            }
-            
-            @keyframes spin {
-                from {
-                    transform:rotate(0deg);
-                }
-                to {
-                    transform:rotate(360deg);
-                }
-            }
-
-            .ls-ftr-btn {
-                margin-left: 0.5rem;
-                font-size: 0.8rem;
-                font-weight: 600;
-                border: 0;
-                padding: 0.25rem 0.5rem;
-                border-radius: 2px;
-                cursor: pointer;
-                outline: none;
-
-                &.ftr-btn-save {
-                    background: #32ae4a;
-                    color: #fff;
-                    
-                    &:hover {
-                        background: #279e3e;
-                    }
-                    
-                    &:active {
-                        background: #1f9035;
-                    }
-                    
-                }
-                
-                &.ftr-btn-discard {
-                    background: none;
-                    border: 1px solid #aaa;
-                    color: #666;
-                    
-                    &:hover {
-                        border: 1px solid rgb(153, 153, 153);
-                        color: rgb(85, 85, 85);
-                    }
-                    
-                    &:active {
-                        border: 1px solid rgb(131, 131, 131);
-                        color: rgb(53, 53, 53);
-                    }
-                }
-            }
         }
     }
 

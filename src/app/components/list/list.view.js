@@ -96,8 +96,7 @@ export const attachSiblingBtn = (isEditMode, hasLastBtn, toSingleNode, list) => 
 
 
 export const editMode = e => {
-    if (e.target.matches(DOM.editToggleBtn)
-        || e.target.matches(DOM.editToggleLabel)) {
+    if (e.target.matches(DOM.editToggleBtn)) {
 
         const list = e.target.closest(DOM.listContent)
 
@@ -193,13 +192,11 @@ export const createNode = (e, key) => {
             if (!hasDescendant) {
                 e.target.closest(closest)
                     .insertAdjacentHTML(pos, newNode)
-                console.log(e.target)
                 
             // will attach to UL
             } else {
                 e.target.closest(closest).lastElementChild
                     .insertAdjacentHTML(pos, newNode)
-                console.log(e.target)
             }
         }
 
@@ -269,8 +266,8 @@ export const deleteNode = e => {
             list.querySelector(DOM.root).classList.toggle('is-muted')
         }
 
-        const removeEventListener = event => {
-            list.querySelector(DOM.modal).removeEventListener('click', event)
+        const removeEventListener = callback => {
+            list.querySelector(DOM.modal).removeEventListener('click', callback)
         }
 
         const deleteNodeItem = () => {
@@ -291,8 +288,6 @@ export const deleteNode = e => {
             }
 
             node.parentNode.removeChild(node)
-
-            // insert new node / prevent only node deletion
         }
 
 
@@ -311,7 +306,6 @@ export const deleteNode = e => {
                 toggleHoveredState()
             }
         }
-
 
         // if node has descendant
         if (node.querySelector('ul')) {

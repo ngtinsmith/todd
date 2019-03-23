@@ -46,7 +46,6 @@
         display: flex;
         align-items: center;
 
-        // New Workspace
         .new-workspace {
             background: #ededed;
             color: #878686;
@@ -102,6 +101,23 @@
                 &:active {
                     background: #19802d;
                 }
+            }
+        }
+
+        .workspace-status {
+            display: none;
+            justify-self: flex-start;
+            margin-right: auto;
+            margin-left: 0.5rem;
+
+            &.is-visible {
+                display: block;
+            }
+            
+            p.ws-stat-label {
+                font-size: 0.75rem;
+                font-weight: 600;
+                color: #aaaaaa;
             }
         }
     }

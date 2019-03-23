@@ -35,15 +35,15 @@ export const DOM = {
     nodeToggleCheck:    '.js-node-content svg[class*="jam-check"]',
 
     editToggle:         '.js-edit',
-    editToggleLabel:    '.js-edit .edit-label',
     editToggleBtn:      '.js-edit .edit-toggle',
 
     listFooter:         '.js-list-footer',
     listFooterContent:  '.js-ftr-content',
     listFooterSave:     '.js-ftr-content .ftr-btn-save',
     listFooterDiscard:  '.js-ftr-content .ftr-btn-discard',
-    listStatus:         '.js-list-status',
-    listStatusLabel:    '.js-list-status .ls-stat-label',
+    wsStatus:           '.js-ws-status',
+    wsStatusLabel:      '.js-ws-status .ws-stat-label',
+    saveListBtn:        '.js-save-list',
 
     btnAddNode:         '.js-add-node',
     btnAddSiblingExp:   '.js-add-node .mdi-add-outline',
@@ -55,6 +55,10 @@ export const DOM = {
     modalButton:        '.js-modal-confirm .modal-btn',
     modalCancel:        '.js-modal-confirm .modal-cancel',
     modalDelete:        '.js-modal-confirm .modal-delete',
+
+    modalDiscard:       '.js-modal-discard',
+    mdlDiscardCancel:   '.js-modal-discard .mdl-cancel',
+    mdlDiscardProceed:  '.js-modal-discard .mdl-discard',
 
     listContent:        '.js-list-content',
     listTitle:          '.list-title',
@@ -68,7 +72,9 @@ export const DOM = {
     panel:              '.js-panel',
     wsSync:             '.js-ws-sync .ws-sync-all',
     editWrap:           '.js-edit-wrap',
-    editWrapContent:    '.js-edit'
+    editWrapContent:    '.js-edit',
+
+    createListBtn:      '.js-list-new svg.jam',
 }
 
 export const s = document.querySelector.bind(document)

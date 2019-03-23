@@ -1,8 +1,8 @@
 import axios from 'axios'
 import List from './list.model'
 import * as listView from './list.view'
-import { s, sA, DOM, keyGen } from '../../utils/base'
-import { htmlList } from './list.templates'
+import { s, sA, DOM, keyGen, parseHTML } from '../../utils/base'
+import { htmlList, nodeContent } from './list.templates'
 
 const url = 'http://localhost:3000/'
 
@@ -35,11 +35,12 @@ const toggleCheck = e => {
     }
 }
 
-const setInputWidth = () => {
+const setInputWidth = list => {
     const widthRefer = s(DOM.widthRefer)
+    const target = list || document
 
     // change to each list
-    sA(DOM.nodeText).forEach(input => {    
+    target.querySelectorAll(DOM.nodeText).forEach(input => {    
         widthRefer.textContent = input.value
         listView.setStyle(widthRefer, input)
         
@@ -50,22 +51,39 @@ const setInputWidth = () => {
 
 
 // sync all
-const sync = (e, method) => {
+const sync = (e, method, isNew, key) => {
+
+    let target = e.target.matches(DOM.wsSync)
+    let isNewList = false
+
+    if (isNew) {
+        // prevent sync on old lists
+        isNewList = e.target.closest(DOM.listContent).className.match('new-list')
+        target = e.target.matches(DOM.saveListBtn)
+    }
 
     // sync one
-    if (e.target.matches(DOM.wsSync)) {
+    if (isNewList || target) {
         const lists = [...s(DOM.panel).children]
         
         lists
-            .filter(list => list.classList.length === 1)
+            .filter(list => {
+                if (method === 'post') {
+                    console.log(list.querySelector(DOM.listContent))
+                    return list.classList.length === 1
+                        && list.querySelector(DOM.listContent).dataset.key === key
+
+                }
+                return list.classList.length === 1
+            })
             .forEach(async (list, index) => {
                 console.log(list.querySelector(DOM.listTitle).value)
 
                 const 
                     title = list.querySelector(DOM.listTitle).value,
-                    order = index,
+                    order = list.querySelector(DOM.listContent).dataset.order || index,
                     workspace = s(DOM.wsDropdown).querySelector(DOM.selectedWrap).getAttribute('data-key'),
-                    dataKey = list.getAttribute('data-key') || keyGen(),
+                    dataKey = list.dataset.key || keyGen(),
                     root = list.querySelector(DOM.root)
 
                 // fetch JSON tree
@@ -141,7 +159,7 @@ class Mutation {
             
         switch (mtn.attributeName) {
             case 'class':
-                node = mtn.target.querySelector(DOM.nodeContent)
+                node = mtn.target.querySelector(DOM.nodeContent) || mtn.target
                 oldClassVal = mtn.oldValue
                 newClassVal = mtn.target.className
                 oldNodeVal = null
@@ -181,6 +199,7 @@ class Mutation {
         return args
     }
  
+    // test as rest params
     setAttributeMutation(attributeName, nodeKey, 
         oldVal, newVal, oldClass, newClass) {
             
@@ -220,12 +239,16 @@ class Mutation {
         if (newNode) {
             actionKey = 'addedNode'
             targetNode = newNode
+            
             targetNode.querySelector(DOM.nodeContent).setAttribute('data-key', keyGen())
             
             nodeKey = targetNode.querySelector(DOM.nodeContent).getAttribute('data-key')
         } else {
             actionKey = 'deletedNode'
             targetNode = removedNode
+            if (!targetNode.querySelector(DOM.nodeContent)) {
+                console.log(removedNode)
+            }
             nodeKey = targetNode.querySelector(DOM.nodeContent).getAttribute('data-key')
         }
         
@@ -240,22 +263,179 @@ class Mutation {
         this.childList.push(obj)
     }
 }
+/* END MUTATION CLASS */
 
-const Record = new Mutation()
+
+
+
+
+let Record = new Mutation()
 let observer
+let list
 
 export const watch = e => {
     
-    // filter toggle events
     if (e.target.matches(DOM.editToggleLabel)
     || e.target.matches(DOM.editToggleBtn)) {
-        
-        const list = e.target.closest(DOM.listContent)
-        const listFooter = list.querySelector(DOM.listFooter)
-        // const listStat = list.querySelector(DOM.listStatus)
-        const listStatusLabel = list.querySelector(DOM.listStatusLabel)
-        const ran = Math.floor(Math.random() * 100)
 
+        list = e.target.closest(DOM.listContent)
+
+        const toggle = list.querySelector(DOM.editToggleBtn)
+
+        const wsStatus = document.querySelector(DOM.wsStatus)
+        const wsStatusLabel = document.querySelector(DOM.wsStatusLabel)
+        
+        const modalDiscard = list.querySelector(DOM.modalDiscard)
+        const saveListBtn = list.querySelector(DOM.saveListBtn)
+        const saveBtnText = saveListBtn.childNodes[0]
+
+        
+
+        const verifyMutations = record => {
+            let mtn = false
+            const mutationRecords = Object.values(record)
+
+            mutationRecords
+                .filter(prop => prop !== true)
+                .forEach(mutation => {
+
+                    if (mutation.length === 0) return
+                    mtn = true
+                })
+            return mtn
+        }
+
+        const detachListener = callback => {
+            list.removeEventListener('click', callback)
+        }
+
+        const toggleDiscardModal = hasClass => {
+            const str = 'is-open'
+            const mdlDiscardClass = modalDiscard.className.match(str)
+
+            if (mdlDiscardClass && hasClass) {
+                modalDiscard.classList.toggle(str)
+            } else if (!mdlDiscardClass && !hasClass) {
+                modalDiscard.classList.toggle(str)
+            }
+        }
+        
+        // refactor as helper for all classlist toggles
+        const toggleMtnStatus = hasClass => {
+            const str = 'has-changes'
+            const statusClass = list.className.match(str)
+
+            if (statusClass && hasClass) {
+                list.classList.toggle(str)
+                wsStatus.classList.toggle('is-visible')
+
+            } else if (!statusClass && !hasClass) {
+                list.classList.toggle(str)
+                wsStatus.classList.toggle('is-visible')
+            }
+        }
+        
+        const saveTree = async (key, tree, isNew) => {
+            
+            if (list.className.match('has-changes')) {
+                saveBtnText.textContent = 'Saving'
+
+                if (isNew) {
+                    await sync(e, 'post', true, key)
+                    list.classList.remove('new-list')
+                } else {
+                    await axios.patch(`${url}api/list/${key}`, tree)
+                }
+                
+                console.log('updates pushed.')
+                // re-attached for discard dispatch event
+                list.parentNode.addEventListener('click', listView.editMode)
+                
+                setTimeout(() => {
+                    wsStatusLabel.textContent = 'All changes saved...'
+                    saveBtnText.textContent = 'Saved'
+                    saveListBtn.classList.toggle('saving')
+                }, 1000)
+                setTimeout(() => {
+                    toggleMtnStatus(true)
+                    wsStatusLabel.textContent = 'Unsaved changes...'
+                    saveBtnText.textContent = 'Save'
+                }, 2000)
+
+            } else {
+                console.log('no changes made, continue...')
+            }
+        }
+
+        const handleDiscard = e => {
+
+            // remove discarded elements from DOM tree
+
+            const btnDiscard = e.target.matches(DOM.mdlDiscardProceed),
+                btnCancel = e.target.matches(DOM.mdlDiscardCancel)
+
+            if (btnDiscard) {
+                const evt = new Event('click', { bubbles: true, cancelable: false })
+                
+                list.parentNode.addEventListener('click', listView.editMode)
+                detachListener(handleDiscard)
+                
+                toggleMtnStatus(true)
+                toggleDiscardModal(true)
+
+                toggle.dispatchEvent(evt)
+                console.log('discarded')
+
+            } else if (btnCancel) {
+
+                toggleDiscardModal(true)
+                console.log('cancelled discard')
+            }
+        }
+
+        const handleRecords = e => {
+
+            try {
+                const
+                    isSaveBtn = e.target.matches(DOM.saveListBtn),
+                    isToggleBtn = e.target.matches(DOM.editToggleBtn)
+
+                if (isSaveBtn) {
+                    saveListBtn.classList.toggle('saving')
+
+                    /* EXPORT AS MAPPING FUNCTION */
+                    const listKey = list.getAttribute('data-key')
+                    const index = [...list.closest(DOM.panel).children].indexOf(list.parentNode)
+        
+                    const 
+                        title = list.querySelector(DOM.listTitle).value,
+                        order = index,
+                        workspace = s(DOM.wsDropdown).querySelector(DOM.selectedWrap)
+                            .getAttribute('data-key'),
+                        dataKey = listKey,
+                        root = list.querySelector(DOM.root),
+                        isNew = list.className.match('new-list')
+        
+                    const tree = new List(title, order, workspace, dataKey)
+                    tree.mapTree(root, tree.nodes)               
+                    
+                    saveTree(listKey, tree, isNew)
+                    
+                } else if (isToggleBtn) {
+
+                    if (list.className.match('has-changes')) {
+                        toggleDiscardModal(false)
+                    } else {
+                        detachListener(handleDiscard)
+                        detachListener(handleRecords)
+                    }
+                }
+                
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        
         const config = {
             attributeFilter: ['value', 'class', 'data-is-checked'],
             attributeOldValue: true,
@@ -263,91 +443,13 @@ export const watch = e => {
             subtree: true,
         }
 
-        const updateTree = async (hasMtn, key, tree) => {
-            console.log(list)
-            console.log(e.target)
-            if (hasMtn) {
-                await axios.patch(`${url}api/list/${key}`, tree)
-                console.log('updates pushed.')
-                console.log(Record)
-                
-                listStatusLabel.textContent = 'All changes saved...'
-                listFooter.classList.toggle('saving')
-                
-                setTimeout(() => {
-                    if (list.querySelector(DOM.listStatus).className.match('has-changes')) {
-                        list.querySelector(DOM.listStatus).classList.toggle('has-changes')
-                        listStatusLabel.textContent = 'Unsaved changes...'
-                    }
-                }, 1500)
-
-            } else {
-                console.log('no changes made, continue...')
-            }
-        }
-
-        const saveTree = e => {
-
-            try {
-                const
-                    isSaveBtn = e.target.matches(DOM.listFooterSave),
-                    isDiscardBtn = e.target.matches(DOM.listFooterDiscard),
-                    isToggleBtn = e.target.matches(DOM.editToggleLabel)
-                    || e.target.matches(DOM.editToggleBtn)
-                
-                if (isSaveBtn) {
-                    listFooter.classList.toggle('saving')
-
-                    let hasMutation = false
-                    const mutations = Object.values(Record)
-                    
-                    mutations
-                        .filter(prop => prop !== true)
-                        .forEach(mutation => {
-                            if (mutation.length === 0) return
-                            hasMutation = true
-                        })
-
-                    const listKey = list.getAttribute('data-key')
-                    const index = [...list.closest(DOM.panel).children].indexOf(list.parentNode)
-        
-                    /* EXPORT AS MAPPING FUNCTION */
-                    const 
-                        title = list.querySelector(DOM.listTitle).value,
-                        order = index,
-                        workspace = s(DOM.wsDropdown).querySelector(DOM.selectedWrap)
-                            .getAttribute('data-key'),
-                        dataKey = listKey,
-                        root = list.querySelector(DOM.root)
-        
-                    const tree = new List(title, order, workspace, dataKey)
-                    tree.mapTree(root, tree.nodes)               
-                    
-                    updateTree(hasMutation, listKey, tree)
-                    
-                } else if (isDiscardBtn) {
-                    
-                    // if discard -> attachEventListener to modal -> removeEventListner after
-                    // open modal confirmation
-                    console.log('Discarded changes.')
-
-                } else if (isToggleBtn) {
-                    // check if there are changes
-                    // changes ? discard modal open : continue
-                    list.removeEventListener('click', saveTree)
-                } 
-                
-            } catch (error) {
-                console.log(error)
-            }
-        }
-
         const mtnCallback = mutations => {
 
-            let invalid = false
-
-            // improve filtering
+            // staging and saved mutation states
+            
             const filters = [
+                'mdi',
+                'hidden-span-ref',
                 'js-tree-root',
                 'js-list-footer',
                 'js-list-content',
@@ -355,51 +457,33 @@ export const watch = e => {
                 'js-list-status',
                 'js-branch-collapse',
                 'js-add-node',
+                'ls-stat-label',
+                'js-modal-confirm',
+                'js-modal-discard',
+                'js-save-list',
             ]
-
-            mutations.forEach(mutation => {
-                filters.forEach(filter => {
-                    const hasFilter = mutation.target.classList.contains(filter)
-                    // isSpan = mutation.target.tagName.match(/span/i)
-                    // isSvg = mutation.target.tagName.match(/svg/i)  || isSpan || isSvg
-                
-                    if (hasFilter) {
-                        invalid = true
-                    }
-                })
-            })
-
-            if (invalid) return
-
-            console.log(`mutations length: ${mutations.length} | roll: ${ran}`)
-            console.log(mutations)
-            // console.log(Record)            
-        
+            
             mutations
                 .filter(mutation => {
-                    let valid = true
+                    let isValid = true
 
                     filters.forEach(filter => {
-                        const hasFilter = mutation.target.classList.contains(filter),
-                            isSpan = mutation.target.tagName.match(/span/i),
-                            isSvg = mutation.target.tagName.match(/svg/i)
-                        
-                        if (hasFilter || isSpan || isSvg) {
-                            valid = false
+                        const hasFilter = mutation.target.classList.contains(filter)
+
+                        if (hasFilter) {
+                            isValid = false
                         }
                     })
 
-                    return valid
+                    return isValid
                 })
                 .forEach(mutation => {
-                
                     switch (mutation.type) {
                         case 'attributes': {
-                            
-                            if (!list.querySelector(DOM.listStatus).className.match('has-changes')) {
-                                list.querySelector(DOM.listStatus).classList.toggle('has-changes')
-                            }
-            
+
+                            toggleMtnStatus(false)
+                            list.parentNode.removeEventListener('click', listView.editMode)
+
                             const props = Record.constructor.setArgs(mutation)
                             Record.setAttributeMutation(...props)
                             break
@@ -416,21 +500,21 @@ export const watch = e => {
             
                             if (mutation.addedNodes.length > 0) {
                                 if (mutation.addedNodes.length === 1) return
-                                if (mutation.addedNodes[1].classList.contains(btn.add)) return
+                                if (mutation.addedNodes[1].classList.contains(btn.add)
+                                    || mutation.addedNodes[1].classList.contains(btn.view)) return
 
                                 addedNode = mutation.addedNodes[1]
-                                
-                                if (!list.querySelector(DOM.listStatus).className.match('has-changes')) {
-                                    list.querySelector(DOM.listStatus).classList.toggle('has-changes')
-                                }
+
                             } else if (mutation.removedNodes.length > 0) {
+                                if (mutation.removedNodes[0].classList.contains(btn.add)
+                                    || mutation.removedNodes[0].classList.contains(btn.view)) return
+
                                 deletedNode = mutation.removedNodes[0]
-                                
-                                if (!list.querySelector(DOM.listStatus).className.match('has-changes')) {
-                                    list.querySelector(DOM.listStatus).classList.toggle('has-changes')
-                                }
                             }
-                
+
+                            toggleMtnStatus(false)
+                            list.parentNode.removeEventListener('click', listView.editMode)
+                            
                             Record.setChildlistMutation(addedNode, deletedNode)
                             break
                         }
@@ -439,55 +523,51 @@ export const watch = e => {
                             console.log('invalid mutation')
                             break
                         }
-                    }           
+                    }
                 })
         }
         /* END MUTATION CALLBACK */
-        
+
+
         if (list.dataset.observe === 'true') {
 
-            list.dataset.observe = 'false'
+            if (!list.className.match('has-changes')) {
+                list.dataset.observe = 'false'
 
-            observer.disconnect()
-            console.log('Observer Disconnected...')
-            
-            listFooter.classList.toggle('show-btn')
-            
+                // null list variable on disconnect to refresh variable?
+                // do let list instead of const
+                
+                observer.disconnect()
+                Record = null
+                observer = null
+                list = null
+                console.log('Observer Disconnected\n--------------------')
+            }
+
         } else if (list.dataset.observe === 'false') {
 
-            if (!Record.isObserving) {
+            // find new way to seggregate mutations per list
+            // then save them in one master mutation records
+
+            if (!Record || !Record.isObserving) {
+                Record = new Mutation()
                 observer = new MutationObserver(mtnCallback)
             }
             
-            list.addEventListener('click', saveTree)
+            list.addEventListener('click', handleDiscard)
+            list.addEventListener('click', handleRecords)
 
             Record.isObserving = true
             list.dataset.observe = 'true'
-
-            listFooter.classList.toggle('show-btn')
+            
             observer.observe(list, config)
 
-            console.log('Observer Connected...')
+            console.log('Observer Connected...\n--------------------')
         }
     }
 }
 
-/** 
- * SYNC on all events
- *      override current sync event
- * DELETE
- * 
- * PWA
- * WEB WORKERS 
- * API CONNECTION
- * INPUT VALIDATION
- */
-
-const setup = list => {
-    listView.attachNodeViewBtn(null, list)
-    listView.createButton(null, false, null, list)
-    setInputWidth()
-}
+// enter / shift enter 
 
 // const cbDragStart = e => {
 //     const dragged = e.target
@@ -523,6 +603,48 @@ const setup = list => {
 //     }
 // }
 
+const setup = (list, setWidth) => {
+    listView.attachNodeViewBtn(null, list)
+    listView.createButton(null, false, null, list)
+    if (setWidth) {
+        setInputWidth(list)
+    }
+    
+}
+
+const create = e => {
+    if (e.target.matches(DOM.createListBtn)) {
+
+        // destructure templates
+        // export as list create func
+
+        const createBtn = s(DOM.panel).lastElementChild
+        const order = s(DOM.panel).children.length - 1
+
+        const template = htmlList(keyGen(), '', order).listContainer,
+            { parent } = htmlList(),
+            child = document.createElement('li'),
+            nodeProps = nodeContent(keyGen(), '', false)
+        
+        const list = listView.createList(template, parent)
+        const root = list.querySelector(DOM.root)
+            
+        list.querySelector(DOM.listContent).classList.add('new-list')
+        child.appendChild(parseHTML(nodeProps))
+        root.appendChild(child)
+
+        s(DOM.panel).insertBefore(list, createBtn)
+        
+        // initial view setup
+        setup(list, false)
+
+        // mutation observer
+        list.addEventListener('click', watch)
+        list.addEventListener('click', listView.editMode)
+
+        console.log('clicked create new btn')
+    }
+}
 
 
 // render all / should be load?
@@ -552,10 +674,11 @@ export const render = async () => {
         lastEl.parentNode.insertBefore(list, lastEl)
         
         // initial view setup
-        setup(list)
+        setup(list, true)
 
         // mutation observer
-        list.addEventListener('click', watch, false)
+        list.addEventListener('click', watch)
+        list.addEventListener('click', listView.editMode)
 
         // drag events
         // list.addEventListener('dragstart', cbDragStart, false)
@@ -576,10 +699,9 @@ export const render = async () => {
 
 export const init = () => {
     document.addEventListener('DOMContentLoaded', () => {
-        setup(null)
+        setup(null, true)
     })
 }
-
 
 export const setEventListeners = () => {
     s(DOM.panel).addEventListener('input', e => {
@@ -587,15 +709,15 @@ export const setEventListeners = () => {
     })
 
     s(DOM.wsHeader).addEventListener('click', e => {
-        sync(e, 'patch')
+        sync(e, 'patch', false, null)
     })
 
     // bubbling dept = 16~
     s(DOM.panel).addEventListener('click', e => {
-        listView.editMode(e)
         toggleNodeView(e)
         toggleCheck(e)
         listView.createNode(e, keyGen())
         listView.deleteNode(e)
+        create(e)
     })
 }
